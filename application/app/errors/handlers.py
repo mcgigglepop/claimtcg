@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, current_app
 from app import db
 from app.errors import bp
 
@@ -12,3 +12,7 @@ def not_found_error(error):
 def internal_error(error):
     db.session.rollback()
     return render_template('errors/500.html'), 500
+
+# error handle custom requests
+def custom_error(error):
+    current_app.logger.info(error)
