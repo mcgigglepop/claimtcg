@@ -9,4 +9,6 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    DEVELOPMENT_MODE = 'local'
+    ENVIRONMENT = 'local'
+    SENDGRID_API_KEY = ''
+    NO_REPLY_EMAIL = ''
