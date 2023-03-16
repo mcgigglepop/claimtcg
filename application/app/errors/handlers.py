@@ -15,4 +15,4 @@ def internal_error(error):
 
 # error handle custom requests
 def custom_error(error):
-    current_app.logger.info(error)
+    current_app.logger.error(error)

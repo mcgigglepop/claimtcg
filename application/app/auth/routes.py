@@ -8,6 +8,7 @@ import uuid
 import random
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+from app.errors.handlers import custom_error
 
 
 def sendMfa(userIdHash):
@@ -37,12 +38,9 @@ def sendMfa(userIdHash):
             html_content=htmlContent)
         try:
             sg = SendGridAPIClient(current_app.config['SENDGRID_API_KEY'])
-            response = sg.send(message)
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)
+            sg.send(message)
         except Exception as e:
-            print(e.message)
+            custom_error(e.message)
      
 
 @bp.route('/login', methods=['GET', 'POST'])
