@@ -88,7 +88,15 @@
                           </label>
                         </div>
                         <!-- End Form Check -->
-          
+                        <div id="register-alert" class="mb-5" role="alert">
+                          {% with messages = get_flashed_messages() %}
+                              {% if messages %}
+                                  <div class="notification is-danger text-center text-danger">
+                                      {{ messages[0] }}
+                                  </div>
+                              {% endif %}
+                          {% endwith %}
+                      </div>
                         <div class="d-grid">
                           <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
                         </div>
