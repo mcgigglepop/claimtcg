@@ -1,0 +1,233 @@
+{% extends "customer_facing/base.html" %}
+
+{% block content %}
+
+<body>
+    <script src="{{ url_for('static', filename='shared/assets/js/hs.theme-appearance.js') }}"></script>
+    <style>
+        
+        .form-control-single-number {
+            font-size: 1.75rem;
+            text-align: center;
+        }
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: 0.6125rem 1rem;
+            font-size: 1.75rem;
+            font-weight: 450;
+            line-height: 2;
+            color: #1e2022;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 0.0625rem solid rgba(231,234,243,.7);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 0.3125rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+
+    </style>
+    <div id="wrapper">
+        {% include 'customer_facing/_header.html' %}
+        <!-- content begin -->
+        <div class="no-bottom no-top" id="content">
+            <div id="top"></div>
+           
+           <!-- section begin -->
+           <section id="subheader" class="text-light" data-bgimage="url(../static/images/background/subheader.jpg) top">
+            <div class="center-y relative text-center">
+                <div class="container">
+                    <div class="row">
+                        
+                        
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- section close -->
+    
+
+    <section aria-label="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                   
+                    
+
+                    <!-- Content -->
+    <div class="container py-5 py-sm-7">
+        
+        <div class="mx-auto" style="max-width: 30rem;">
+          <!-- Card -->
+          <div class="card card-lg mb-5">
+            <div class="card-body text-center">
+              <div class="mb-4">
+                <img class="avatar avatar-xxl avatar-4x3" src="{{ url_for('static', filename='shared/assets/svg/illustrations/oc-unlock.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                <img class="avatar avatar-xxl avatar-4x3" src="{{ url_for('static', filename='shared/assets/svg/illustrations-light/oc-unlock.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
+              </div>
+  
+              <div class="mb-5">
+                <h1 class="display-5">2-step Verification</h1>
+                <p class="mb-0">We sent a verification code to your email.</p>
+                <p>Enter the code from the email in the field below.</p>
+              </div>
+  
+              <form class="js-validate needs-validation" method="post" action='mfa' novalidate>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="row gx-2 gx-sm-3">
+                    <div class="col">
+                        <!-- Form -->
+                        <div class="mb-4">
+                            <input type="text" class="form-control form-control-single-number code-input text-center" name="code1" id="twoStepVerificationSrCodeInput1" placeholder="" aria-label="" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false" autofocus>
+                        </div>
+                        <!-- End Form -->
+                    </div>
+                    <div class="col">
+                        <!-- Form -->
+                        <div class="mb-4">
+                            <input type="text" class="form-control form-control-single-number code-input text-center" name="code2" id="twoStepVerificationSrCodeInput2" placeholder="" aria-label="" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false">
+                        </div>
+                        <!-- End Form -->
+                    </div>
+                    <div class="col">
+                        <!-- Form -->
+                        <div class="mb-4">
+                            <input type="text" class="form-control form-control-single-number code-input text-center" name="code3" id="twoStepVerificationSrCodeInput3" placeholder="" aria-label="" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false">
+                        </div>
+                        <!-- End Form -->
+                    </div>
+                    <div class="col">
+                        <!-- Form -->
+                        <div class="mb-4">
+                            <input type="text" class="form-control form-control-single-number code-input text-center" name="code4" id="twoStepVerificationSrCodeInput4" placeholder="" aria-label="" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false">
+                        </div>
+                        <!-- End Form -->
+                    </div>
+                </div>
+                <div id="register-alert" class="pb-2" role="alert">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <div class="notification is-danger text-center text-danger">
+                                {{ messages[0] }}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-primary btn-lg">Verify my account</button>
+                </div>
+                <div class="text-center">
+                    <p>Haven't received it? <a href="#" id="resendMfa">Resend a new code.</a></p>
+                </div>
+                <input type="hidden" name="ref" value='{{request.args.get("ref")}}'>
+                <input type="hidden" name="register-attempt" value='{{register_attempt}}'>
+            </form>
+            </div>
+          </div>
+          <!-- End Card -->
+  
+        
+        </div>
+      </div>
+      <!-- End Content -->
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+			
+			
+        </div>
+        <!-- content close -->
+        <a href="#" id="back-to-top"></a>
+        {% include 'customer_facing/_footer.html' %}
+        
+    </div>
+    
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="{{ url_for('static', filename='shared/js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='shared/js/designesia.js') }}"></script>
+
+    <!-- COOKIES NOTICE  -->
+    <script src="{{ url_for('static', filename='shared/js/cookit.js') }}"></script>
+     <script>
+      $(document).ready(function() {
+        $.cookit({
+          backgroundColor: '#EEEEEE',
+          messageColor: '#333333',
+          linkColor: '#403f83',
+          buttonColor: '#403f83',
+          messageText: "This website uses cookies to ensure you get the best experience on our website.",
+          linkText: "Learn more",
+          linkUrl: "index.html",
+          buttonText: "I accept",
+        });
+      });
+    </script>
+
+
+  
+    <!-- JS Implementing Plugins -->
+    <script src="{{ url_for('static', filename='shared/assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js') }}"></script>
+  
+    <!-- JS Front -->
+    <script src="{{ url_for('static', filename='shared/assets/js/theme.min.js') }}"></script>
+  
+    <!-- JS Plugins Init. -->
+    <script>
+      (function() {
+        window.onload = function () {
+          // INITIALIZATION OF BOOTSTRAP VALIDATION
+          // =======================================================
+          HSBsValidation.init('.js-validate', {
+            onSubmit: data => {
+              //success
+            }
+          })
+  
+  
+          // INITIALIZATION OF TOGGLE PASSWORD
+          // =======================================================
+          new HSTogglePassword('.js-toggle-password')
+        }
+      })()
+    </script>
+    <script>
+        const inputElements = [...document.querySelectorAll('input.code-input')]    
+        inputElements.forEach((ele, index) => {
+            ele.addEventListener('keydown', (e) => {
+                // if the keycode is backspace & the current field is empty
+                // focus the input before the current. Then the event happens
+                // which will clear the "before" input box.
+                if (e.keyCode === 8 && e.target.value === '') inputElements[Math.max(0, index - 1)].focus()
+            })
+            ele.addEventListener('input', (e) => {
+                // take the first character of the input
+                // this actually breaks if you input an emoji like 👨‍👩‍👧‍👦....
+                // but I'm willing to overlook insane security code practices.
+                const [first, ...rest] = e.target.value
+                e.target.value = first ?? '' // first will be undefined when backspace was entered, so set the input to ""
+                const lastInputBox = index === inputElements.length - 1
+                const didInsertContent = first !== undefined
+                if (didInsertContent && !lastInputBox) {
+                    // continue to input the rest of the string
+                    inputElements[index + 1].focus()
+                    inputElements[index + 1].value = rest.join('')
+                    inputElements[index + 1].dispatchEvent(new Event('input'))
+                }
+            })
+        })
+    </script>
+    <script>
+        $("#resendMfa").click(function() {
+            location.reload();
+        });
+    </script>
+</body>
+{% endblock %}
