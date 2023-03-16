@@ -1,0 +1,154 @@
+{% extends "internal/base.html" %}
+
+{% block content %}
+    <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl footer-offset">
+
+        <script src="{{ url_for('static', filename='internal/js/hs.theme-appearance.js') }}"></script>
+      
+        <script src="{{ url_for('static', filename='internal/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js') }}"></script>
+      
+        {% include 'internal/_header.html' %}
+        {% include 'internal/_sidebar.html' %}
+      
+        <!-- ========== MAIN CONTENT ========== -->
+        <!-- Navbar Vertical -->
+
+        <main id="content" role="main" class="main">
+          <!-- Content -->
+          <div class="content container-fluid">
+            <div class="row justify-content-center align-items-sm-center py-sm-10">
+              <div class="col-9 col-sm-6 col-lg-4">
+                <div class="text-center text-sm-end me-sm-4 mb-5 mb-sm-0">
+                  <img class="img-fluid" src="{{ url_for('static', filename='internal/svg/illustrations/oc-thinking.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                  <img class="img-fluid" src="{{ url_for('static', filename='internal/svg/illustrations-light/oc-thinking.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
+                </div>
+              </div>
+              <!-- End Col -->
+      
+              <div class="col-sm-6 col-lg-4 text-center text-sm-start">
+                <h1 class="display-1 mb-0">404</h1>
+                <p class="lead">Sorry, the page you're looking for cannot be found.</p>
+                <a class="btn btn-primary" href="{{ url_for('main.items') }}">Go back to the App</a>
+              </div>
+              <!-- End Col -->
+            </div>
+            <!-- End Row -->
+          </div>
+          <!-- End Content -->
+      
+          <!-- Footer -->
+      
+          <div class="footer">
+            <div class="row justify-content-between align-items-center">
+              <div class="col">
+                <p class="fs-6 mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2022 Htmlstream.</span></p>
+              </div>
+              <!-- End Col -->
+      
+              <div class="col-auto">
+                <div class="d-flex justify-content-end">
+                  <!-- List Separator -->
+                  <ul class="list-inline list-separator">
+                    <li class="list-inline-item">
+                      <a class="list-separator-link" href="#">FAQ</a>
+                    </li>
+      
+                    <li class="list-inline-item">
+                      <a class="list-separator-link" href="#">License</a>
+                    </li>
+      
+                    <li class="list-inline-item">
+                      <!-- Keyboard Shortcuts Toggle -->
+                      <button class="btn btn-ghost-secondary btn btn-icon btn-ghost-secondary rounded-circle" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasKeyboardShortcuts" aria-controls="offcanvasKeyboardShortcuts">
+                        <i class="bi-command"></i>
+                      </button>
+                      <!-- End Keyboard Shortcuts Toggle -->
+                    </li>
+                  </ul>
+                  <!-- End List Separator -->
+                </div>
+              </div>
+              <!-- End Col -->
+            </div>
+            <!-- End Row -->
+          </div>
+      
+          <!-- End Footer -->
+        </main>
+        <!-- ========== END MAIN CONTENT ========== -->
+      
+      
+        <!-- JS Global Compulsory  -->
+        <script src="{{ url_for('static', filename='internal/vendor/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='internal/vendor/jquery-migrate/dist/jquery-migrate.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='internal/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+      
+        <!-- JS Implementing Plugins -->
+        <script src="{{ url_for('static', filename='internal/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='internal/vendor/hs-form-search/dist/hs-form-search.min.js') }}"></script>
+      
+        <!-- JS Front -->
+        <script src="{{ url_for('static', filename='internal/js/theme.min.js') }}"></script>
+      
+        <!-- JS Plugins Init. -->
+        <script>
+          (function() {
+            
+      
+            // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+            // =======================================================
+            new HSSideNav('.js-navbar-vertical-aside').init()
+      
+      
+            // INITIALIZATION OF FORM SEARCH
+            // =======================================================
+            new HSFormSearch('.js-form-search')
+      
+      
+            // INITIALIZATION OF BOOTSTRAP DROPDOWN
+            // =======================================================
+            HSBsDropdown.init()
+          })()
+        </script>
+      
+        <!-- Style Switcher JS -->
+      
+        <script>
+            (function () {
+              // STYLE SWITCHER
+              // =======================================================
+              const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
+              const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
+      
+              // Function to set active style in the dorpdown menu and set icon for dropdown trigger
+              const setActiveStyle = function () {
+                $variants.forEach($item => {
+                  if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
+                    $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
+                    return $item.classList.add('active')
+                  }
+      
+                  $item.classList.remove('active')
+                })
+              }
+      
+              // Add a click event to all items of the dropdown to set the style
+              $variants.forEach(function ($item) {
+                $item.addEventListener('click', function () {
+                  HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
+                })
+              })
+      
+              // Call the setActiveStyle on load page
+              setActiveStyle()
+      
+              // Add event listener on change style to call the setActiveStyle function
+              window.addEventListener('on-hs-appearance-change', function () {
+                setActiveStyle()
+              })
+            })()
+          </script>
+      
+        <!-- End Style Switcher JS -->
+      </body>
+{% endblock %}
