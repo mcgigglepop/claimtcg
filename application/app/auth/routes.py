@@ -79,3 +79,11 @@ def mfa():
             user = User.query.filter_by(userIdHash=userIdHash).first()
             if user is None:
                 return redirect(url_for('auth.login'))
+            
+             # sets the registration attempt value to true/false
+            if registerAttempt is not None:
+                registerAttempt = True
+            else:
+                registerAttempt = False
+
+            return render_template('auth/mfa.html', register_attempt=registerAttempt, title='MFA')
