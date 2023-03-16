@@ -1,0 +1,214 @@
+{% extends "customer_facing/base.html" %}
+
+{% block content %}
+
+<body>
+    <script src="{{ url_for('static', filename='shared/assets/js/hs.theme-appearance.js') }}"></script>
+    <div id="wrapper">
+        {% include 'customer_facing/_header.html' %}
+        <!-- content begin -->
+        <div class="no-bottom no-top" id="content">
+            <div id="top"></div>
+           
+           <!-- section begin -->
+           <section id="subheader" class="text-light" data-bgimage="url(../static/images/background/subheader.jpg) top">
+            <div class="center-y relative text-center">
+                <div class="container">
+                    <div class="row">
+                        
+                        
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- section close -->
+    
+
+    <section aria-label="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <!-- Form -->
+            <form class="js-validate needs-validation" method="post" action="register" novalidate>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="text-center">
+                  <div class="mb-5">
+                    <h1 class="display-5">Create your account</h1>
+                    <p>Already have an account? <a class="link" href="{{ url_for('auth.login') }}">Sign in here</a></p>
+                  </div>
+  
+                  <div class="d-grid mb-4">
+                    <a class="btn btn-white btn-lg" href="#">
+                      <span class="d-flex justify-content-center align-items-center">
+                        <img class="avatar avatar-xss me-2" src="{{ url_for('static', filename='shared/assets/svg/brands/google-icon.svg') }}" alt="Image Description">
+                        Sign up with Google
+                      </span>
+                    </a>
+                  </div>
+  
+                  <span class="divider-center text-muted mb-4">OR</span>
+                </div>
+  
+                <label class="form-label" for="fullNameSrEmail">Full name</label>
+  
+                <!-- Form -->
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- Form -->
+                    <div class="mb-4">
+                      <input type="text" class="form-control form-control-lg" name="firstName" id="fullNameSrEmail" placeholder="Mark" aria-label="Mark" required>
+                      <span class="invalid-feedback">Please enter your first name.</span>
+                    </div>
+                    <!-- End Form -->
+                  </div>
+  
+                  <div class="col-sm-6">
+                    <!-- Form -->
+                    <div class="mb-4">
+                      <input type="text" class="form-control form-control-lg" placeholder="Williams" name="lastName" aria-label="Williams" required>
+                      <span class="invalid-feedback">Please enter your last name.</span>
+                    </div>
+                    <!-- End Form -->
+                  </div>
+                </div>
+                <!-- End Form -->
+  
+                <!-- Form -->
+                <div class="mb-4">
+                  <label class="form-label" for="signupSrEmail">Your email</label>
+                  <input type="email" class="form-control form-control-lg" name="email" id="signupSrEmail" placeholder="Markwilliams@site.com" aria-label="Markwilliams@site.com" required>
+                  <span class="invalid-feedback">Please enter a valid email address.</span>
+                </div>
+                <!-- End Form -->
+  
+                <!-- Form -->
+                <div class="mb-4">
+                  <label class="form-label" for="signupSrPassword">Password</label>
+  
+                  <div class="input-group input-group-merge" data-hs-validation-validate-class>
+                    <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="signupSrPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8" data-hs-toggle-password-options='{
+                             "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
+                             "defaultClass": "bi-eye-slash",
+                             "showClass": "bi-eye",
+                             "classChangeTarget": ".js-toggle-password-show-icon-1"
+                           }'>
+                    <a class="js-toggle-password-target-1 input-group-append input-group-text" href="javascript:;">
+                      <i class="js-toggle-password-show-icon-1 bi-eye"></i>
+                    </a>
+                  </div>
+  
+                  <span class="invalid-feedback">Your password is invalid. Please try again.</span>
+                </div>
+                <!-- End Form -->
+  
+                <!-- Form -->
+                <div class="mb-4">
+                  <label class="form-label" for="signupSrConfirmPassword">Confirm password</label>
+  
+                  <div class="input-group input-group-merge" data-hs-validation-validate-class>
+                    <input type="password" class="js-toggle-password form-control form-control-lg" name="confirmPassword" id="signupSrConfirmPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8" data-hs-toggle-password-options='{
+                             "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
+                             "defaultClass": "bi-eye-slash",
+                             "showClass": "bi-eye",
+                             "classChangeTarget": ".js-toggle-password-show-icon-2"
+                           }'>
+                    <a class="js-toggle-password-target-2 input-group-append input-group-text" href="javascript:;">
+                      <i class="js-toggle-password-show-icon-2 bi-eye"></i>
+                    </a>
+                  </div>
+  
+                  <span class="invalid-feedback">Password does not match the confirm password.</span>
+                </div>
+                <!-- End Form -->
+  
+                <!-- Form Check -->
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="checkbox" value="" id="termsCheckbox" required>
+                  <label class="form-check-label" for="termsCheckbox">
+                    I accept the <a href="#">Terms and Conditions</a>
+                  </label>
+                  <span class="invalid-feedback">Please accept our Terms and Conditions.</span>
+                </div>
+                <!-- End Form Check -->
+                <div id="register-alert" class="mb-5" role="alert">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <div class="notification is-danger text-center text-danger">
+                                {{ messages[0] }}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary btn-lg">Create an account</button>
+                </div>
+              </form>
+              <!-- End Form -->
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+			
+			
+        </div>
+        <!-- content close -->
+        <a href="#" id="back-to-top"></a>
+        {% include 'customer_facing/_footer.html' %}
+        
+    </div>
+    
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="{{ url_for('static', filename='shared/js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='shared/js/designesia.js') }}"></script>
+
+    <!-- COOKIES NOTICE  -->
+    <script src="{{ url_for('static', filename='shared/js/cookit.js') }}"></script>
+     <script>
+      $(document).ready(function() {
+        $.cookit({
+          backgroundColor: '#EEEEEE',
+          messageColor: '#333333',
+          linkColor: '#403f83',
+          buttonColor: '#403f83',
+          messageText: "This website uses cookies to ensure you get the best experience on our website.",
+          linkText: "Learn more",
+          linkUrl: "index.html",
+          buttonText: "I accept",
+        });
+      });
+    </script>
+
+
+  
+    <!-- JS Implementing Plugins -->
+    <script src="{{ url_for('static', filename='shared/assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js') }}"></script>
+  
+    <!-- JS Front -->
+    <script src="{{ url_for('static', filename='shared/assets/js/theme.min.js') }}"></script>
+  
+    <!-- JS Plugins Init. -->
+    <script>
+      (function() {
+        window.onload = function () {
+          // INITIALIZATION OF BOOTSTRAP VALIDATION
+          // =======================================================
+          HSBsValidation.init('.js-validate', {
+            onSubmit: data => {
+              //success
+            }
+          })
+  
+  
+          // INITIALIZATION OF TOGGLE PASSWORD
+          // =======================================================
+          new HSTogglePassword('.js-toggle-password')
+        }
+      })()
+    </script>
+</body>
+{% endblock %}
