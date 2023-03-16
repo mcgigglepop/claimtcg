@@ -80,7 +80,10 @@ def mfa():
             if user is None:
                 return redirect(url_for('auth.login'))
             
-             # sets the registration attempt value to true/false
+            # trigger the send mfa function 
+            sendMfa(userIdHash)
+
+            # sets the registration attempt value to true/false
             if registerAttempt is not None:
                 registerAttempt = True
             else:
