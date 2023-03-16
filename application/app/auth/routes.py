@@ -26,3 +26,10 @@ def register():
             return redirect(url_for('main.dashboard'))
         else:
             return render_template('auth/register.html', title='Register')
+    else:
+        # get the form data on submit
+        firstName = request.form.get('firstName')
+        lastName = request.form.get('lastName')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        confirmPassword = request.form.get('confirmPassword')
