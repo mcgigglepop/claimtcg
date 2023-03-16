@@ -50,3 +50,9 @@ def register():
         
         # generate the userid hash
         userIdHashash = uuid.uuid4().hex
+
+        # create a user object
+        user = User(email=email, firstName=firstName, userIdHash=userIdHashash, lastName=lastName)
+        user.setPassword(password)
+        db.session.add(user)
+        db.session.commit()
