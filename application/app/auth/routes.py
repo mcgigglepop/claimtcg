@@ -1,7 +1,7 @@
 
 from app.auth import bp
 from flask import request, redirect, render_template, url_for, flash
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 from app import db
 from app.models import User
 import uuid
@@ -119,3 +119,11 @@ def mfa():
             flash('Invalid Code. We sent you a new code.')
             # redirect to mfa sending userid hash as a url parameter
             return redirect(url_for('auth.mfa', register_attempt=registerAttempt, ref=userIdHash))
+        
+@bp.route('/logout')
+def logout():
+    """
+    Log the user out of the platform
+    """
+    logout_user()
+    return redirect(url_for('main.index'))
