@@ -1,6 +1,6 @@
 
 from app.auth import bp
-from flask import request, redirect, render_template, url_for
+from flask import request, redirect, render_template, url_for, flash
 from flask_login import current_user
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -33,3 +33,8 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
         confirmPassword = request.form.get('confirmPassword')
+
+    # check if passwords match
+        if password != confirmPassword: 
+            flash('Passwords do not match')
+            return redirect(url_for('auth.register'))
