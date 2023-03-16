@@ -8,3 +8,10 @@ def index():
     Route and method for rendering the index page.
     """
     return render_template('customer_facing/index.html', title='Index')
+
+@bp.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+    """
+    Route and method for rendering the dashboard page.
+    """
+    return render_template('internal/dashboard.html', title='Dashboard')
