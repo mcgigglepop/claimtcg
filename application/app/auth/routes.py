@@ -71,4 +71,11 @@ def mfa():
         if current_user.is_authenticated:
             return redirect(url_for('main.dashboard'))
         else:
-            
+            # get the user id hash from the url parameter
+            userIdHash = request.args.get('ref')
+            registerAttempt = request.args.get('register')
+
+            # redirect if they try to force a fake user hash
+            user = User.query.filter_by(userIdHash=userIdHash).first()
+            if user is None:
+                return redirect(url_for('auth.login'))
