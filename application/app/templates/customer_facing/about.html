@@ -1,0 +1,137 @@
+{% extends "customer_facing/base.html" %}
+
+{% block content %}
+<body>
+    <div id="wrapper">
+        {% include 'customer_facing/_header.html' %}
+        <div class="no-bottom no-top" id="content">
+            <div id="top"></div>
+            <!-- section begin -->
+            <section id="subheader" class="text-light">
+                    <div class="center-y relative text-center">
+                        <div class="container">
+                            <div class="row">
+                                
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+            <!-- section close -->
+            
+
+            <!-- section begin -->
+             <section id="section-fun-facts" class="pt60 pb60">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="p-title invert">Fun facts</span><br>
+                                <h2>
+                                    What's the deal?
+                                </h2>
+                                <div class="small-border sm-left"></div>
+                                <p>Just a little about us</p>
+                            </div>
+
+                            <div class="col-md-8 offset-md-1">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay="0s">
+                                        <div class="de_count">
+                                            <h4>Monitor</h4>
+                                            <h5 class="id-color">Portfolio and Asset Mangement.</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay=".25s">
+                                        <div class="de_count">
+                                            <h4>Provenance</h4>
+                                            <h5 class="id-color">Track Owner History.</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay=".4s">
+                                        <div class="de_count">
+                                            <h4>Protection</h4>
+                                            <h5 class="id-color">Buyer Protected. Seller Protected.</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay=".6s">
+                                        <div class="de_count">
+                                            <h3><span class="timer" data-to="0" data-speed="3000">0</span></h3>
+                                            <h5 class="id-color">Seller Fees.</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay=".8s">
+                                        <div class="de_count">
+                                            <h4>Unlimited</h4>
+                                            <h5 class="id-color">Listing Capacity.</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay="1s">
+                                        <div class="de_count">
+                                            <h4>Billing</h4>
+                                            <h5 class="id-color">Streamline Sales with Automated Billing.</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- section begin -->
+             <section id="section-fun-facts" class="pt60 pb60">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+
+
+                            <h2>Who We Are</h2>
+                            <p>Welcome to ClaimTCG! We are a team of passionate collectors who are dedicated to providing the ultimate online platform for trading card enthusiasts to buy, sell, and trade their cards.</p>
+                            <p>Our platform is designed to make the buying, selling, and trading process as easy and seamless as possible. We offer a user-friendly interface that allows collectors to search for specific cards, browse by category, and filter by various criteria, such as set, rarity, condition, and price. Our website also provides tools to help collectors manage their collections, including wishlists, inventory management, and tracking features.</p>
+                            <p>We are committed to providing exceptional customer service and ensuring that every collector has a positive experience on our platform. Our support team is available to answer any questions or concerns you may have, and we work tirelessly to ensure that all transactions on our website are safe, secure, and hassle-free.</p>
+                            <p>Thank you for choosing our trading card website as your go-to destination for all your collecting needs. We look forward to helping you expand your collection and connect with other collectors from around the world. Happy collecting!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+        <!-- section close -->
+			
+            <!-- section close -->
+
+        </div>
+        <!-- content close -->
+
+        <a href="#" id="back-to-top"></a>
+        {% include 'customer_facing/_footer.html' %}
+        
+    </div>
+    
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="{{ url_for('static', filename='shared/js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='shared/js/designesia.js') }}"></script>
+
+    <!-- COOKIES NOTICE  -->
+    <script src="{{ url_for('static', filename='shared/js/cookit.js') }}"></script>
+     <script>
+      $(document).ready(function() {
+        $.cookit({
+          backgroundColor: '#EEEEEE',
+          messageColor: '#333333',
+          linkColor: '#403f83',
+          buttonColor: '#403f83',
+          messageText: "This website uses cookies to ensure you get the best experience on our website.",
+          linkText: "Learn more",
+          linkUrl: "index.html",
+          buttonText: "I accept",
+        });
+      });
+    </script>
+</body>
+{% endblock %}
