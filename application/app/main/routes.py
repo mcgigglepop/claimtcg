@@ -1,5 +1,6 @@
 from app.main import bp
 from flask import render_template
+from flask_login import login_required
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
@@ -10,6 +11,7 @@ def index():
     return render_template('customer_facing/index.html', title='Index')
 
 @bp.route('/dashboard', methods=['GET', 'POST'])
+@login_required
 def dashboard():
     """
     Route and method for rendering the dashboard page.
@@ -24,6 +26,7 @@ def about():
     return render_template('customer_facing/about.html', title='About Us')
 
 @bp.route('/items', methods=['GET', 'POST'])
+@login_required
 def items():
     """
     Route and method for rendering the items page.
