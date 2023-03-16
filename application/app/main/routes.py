@@ -22,3 +22,10 @@ def about():
     Route and method for rendering the about page.
     """
     return render_template('customer_facing/about.html', title='About Us')
+
+@bp.route('/items', methods=['GET', 'POST'])
+def items():
+    """
+    Route and method for rendering the items page.
+    """
+    return render_template('internal/items.html', title='All Items')
