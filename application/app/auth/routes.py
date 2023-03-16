@@ -5,6 +5,23 @@ from flask_login import current_user, login_user, logout_user
 from app import db
 from app.models import User
 import uuid
+import random
+
+
+def sendMfa(userIdHash):
+    """
+    Method to send MFA.
+    Params: userIdHash: Hash to identify the user
+    """
+    # generate and set a current mfa token on the user record
+    mfaToken = random.randint(1000,9999)
+    userRecord = User.query.filter_by(userIdHash=userIdHash).first()
+    userRecord.currentMfaCode = mfaToken
+    db.session.commit()
+
+    
+
+     
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
