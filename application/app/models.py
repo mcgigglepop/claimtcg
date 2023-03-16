@@ -41,3 +41,13 @@ class User(UserMixin, db.Model):
     
     def getCollections(self):
         return Collection.query.filter_by(user_id=self.id).all()
+    
+# Collections Model
+class Collection(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    collectionName = db.Column(db.String(140), index=True)
+    visibilityType = db.Column(db.String(140), index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Collection {}>'.format(self.collectionName)
