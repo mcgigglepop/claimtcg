@@ -51,3 +51,7 @@ class Collection(db.Model):
 
     def __repr__(self):
         return '<Collection {}>'.format(self.collectionName)
+    
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
