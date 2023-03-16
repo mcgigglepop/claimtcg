@@ -1,7 +1,7 @@
 
 from app.auth import bp
 from flask import request, redirect, render_template, url_for, flash
-from flask_login import current_user
+from flask_login import current_user, login_user
 from app import db
 from app.models import User
 import uuid
@@ -90,3 +90,32 @@ def mfa():
                 registerAttempt = False
 
             return render_template('auth/mfa.html', register_attempt=registerAttempt, title='MFA')
+    else:
+        # get front end data
+        code1 = request.form.get('code1')
+        code2 = request.form.get('code2')
+        code3 = request.form.get('code3')
+        code4 = request.form.get('code4')
+        userIdHash = request.form.get('ref')
+        registerAttempt = request.form.get('register-attempt')
+
+        # append the codes together
+        input_code = f'{code1}{code2}{code3}{code4}'
+
+        # get the user object
+        userObject = User.query.filter_by(userIdHash=userIdHash).first()
+
+        # match the form mfa code input to the current mfa code stored on the user database record
+        if str(input_code) == str(userObject.getCurrentMfaCode()):
+            if registerAttempt == True:
+                # verify the user
+                userObject.isVerified = True
+                db.session.commit()
+            
+            # log the user in and redirect to the dashboard
+            login_user(userObject)
+            return redirect(url_for('main.dashboard'))
+        else:
+            flash('Invalid Code. We sent you a new code.')
+            # redirect to mfa sending userid hash as a url parameter
+            return redirect(url_for('auth.mfa', register_attempt=registerAttempt, ref=userIdHash))
