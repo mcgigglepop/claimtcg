@@ -1,11 +1,13 @@
 
 from app.auth import bp
-from flask import request, redirect, render_template, url_for, flash
+from flask import request, redirect, render_template, url_for, flash, current_app
 from flask_login import current_user, login_user, logout_user
 from app import db
 from app.models import User
 import uuid
 import random
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 
 def sendMfa(userIdHash):
@@ -19,8 +21,28 @@ def sendMfa(userIdHash):
     userRecord.currentMfaCode = mfaToken
     db.session.commit()
 
-    
+    # get the user email to send the token to
+    emailRecipient = userRecord.getEmail()
+    htmlContent = "<p>Your MFA Code is {} </p>.".format(mfaToken)
 
+    # check the environment and either print to log or send actual email
+    if current_app.config['ENVIRONMENT'] == "local":
+        print(emailRecipient)
+        print(htmlContent)
+    else:
+        message = Mail(
+            from_email=current_app.config['NO_REPLY_EMAIL'],
+            to_emails=emailRecipient,
+            subject="Your MFA Token",
+            html_content=htmlContent)
+        try:
+            sg = SendGridAPIClient(current_app.config['SENDGRID_API_KEY'])
+            response = sg.send(message)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+        except Exception as e:
+            print(e.message)
      
 
 @bp.route('/login', methods=['GET', 'POST'])
