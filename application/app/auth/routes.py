@@ -56,3 +56,6 @@ def register():
         user.setPassword(password)
         db.session.add(user)
         db.session.commit()
+
+        # redirect to mfa
+        return redirect(url_for('auth.mfa', ref=userIdHashash, register=True))
