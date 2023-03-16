@@ -14,3 +14,15 @@ def login():
             return redirect(url_for('main.dashboard'))
         else:
             return render_template('auth/login.html', title='Login')
+        
+@bp.route('/register', methods=['GET', 'POST'])
+def register():
+    """
+    Route and method for registering a user account. 
+    Will redirect to dashboard if they are logged in.
+    """
+    if request.method=='GET':
+        if current_user.is_authenticated:
+            return redirect(url_for('main.dashboard'))
+        else:
+            return render_template('auth/register.html', title='Register')
