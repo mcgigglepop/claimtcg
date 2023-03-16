@@ -54,6 +54,25 @@ def login():
             return redirect(url_for('main.dashboard'))
         else:
             return render_template('auth/login.html', title='Login')
+    else:
+        # get form data
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        # get the user object
+        user_object = User.query.filter_by(email=email).first()
+
+        # check for a valid user or password
+        if user_object is None or not user_object.checkPassword(password):
+            # flash the error message and redirect to login
+            flash('Invalid username or password')
+            return redirect(url_for('auth.login'))
+        
+        # get the userid hash
+        user_id_hash = user_object.userIdHash
+        
+        # redirect to the mfa page sending userid hash as a url parameter
+        return redirect(url_for('auth.mfa', ref=user_id_hash))
         
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
