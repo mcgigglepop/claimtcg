@@ -59,3 +59,16 @@ def register():
 
         # redirect to mfa
         return redirect(url_for('auth.mfa', ref=userIdHashash, register=True))
+    
+@bp.route('/mfa', methods=['GET', 'POST'])
+def mfa():
+    """
+    Route and method for mfa. 
+    User will redirect to dashboard if they are logged in
+    or if the query parameter is not valid for a user.
+    """
+    if request.method=='GET':
+        if current_user.is_authenticated:
+            return redirect(url_for('main.dashboard'))
+        else:
+            
