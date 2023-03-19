@@ -1,6 +1,9 @@
 from app.main import bp
-from flask import render_template
-from flask_login import login_required
+from flask import render_template, request
+from flask_login import login_required, current_user
+import json
+from app import db
+from app.models import Collection, Tag
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
@@ -47,4 +50,26 @@ def createCollection():
     """
     Route and method for rendering the create collection page.
     """
-    return render_template('internal/create-collection.html', title='Create Collection')
+    if request.method=='GET':
+        return render_template('internal/create-collection.html', title='Create Collection')
+    else:
+        collectionName = request.form.get('collectionName')
+        visibilityType = request.form.get('visibilityType')
+        collectionType = request.form.get('collectionType')
+
+        collection = Collection(collectionName=collectionName, visibilityType=visibilityType, collectionType=collectionType, author=current_user)
+
+        db.session.flush()
+        tagObjects = []
+
+        if request.form.get('tag'): tagObjects.append(Tag(tagName=request.form.get('tag'), collectionId=collection.id))
+        if request.form.get('tagLine_0'): tagObjects.append(Tag(tagName=request.form.get('tagLine_0'), collectionId=collection.id))
+        if request.form.get('tagLine_1'): tagObjects.append(Tag(tagName=request.form.get('tagLine_1'), collectionId=collection.id))
+        if request.form.get('tagLine_2'): tagObjects.append(Tag(tagName=request.form.get('tagLine_2'), collectionId=collection.id))
+        if request.form.get('tagLine_3'): tagObjects.append(Tag(tagName=request.form.get('tagLine_3'), collectionId=collection.id))
+        if request.form.get('tagLine_4'): tagObjects.append(Tag(tagName=request.form.get('tagLine_4'), collectionId=collection.id))
+
+        db.session.bulk_save_objects(tagObjects)
+        db.session.commit()
+
+        return render_template('internal/create-collection.html', title='Create Collection')

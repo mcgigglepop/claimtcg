@@ -47,6 +47,7 @@ class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     collectionName = db.Column(db.String(140), index=True)
     visibilityType = db.Column(db.String(140), index=True)
+    collectionType = db.Column(db.String(140))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
