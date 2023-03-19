@@ -51,6 +51,13 @@ def createCollection():
     Route and method for rendering the create collection page.
     """
     if request.method=='GET':
+        
+        collections_and_tags = db.session.query(Collection, Tag).join(Tag, Collection.id==Tag.collectionId).filter(Collection.user_id==current_user.id).all()
+
+        # Print the results to check
+        for c, t in collections_and_tags:
+            print("Collection ID: ", c.id, "Collection Name: ", c.collectionName, "Tag: ", t.tagName)
+
         return render_template('internal/create-collection.html', title='Create Collection')
     else:
         collectionName = request.form.get('collectionName')
