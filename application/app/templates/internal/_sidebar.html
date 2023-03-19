@@ -42,7 +42,6 @@
 
             </div>
             <div id="navbarVerticalMenuPagesMenu">
-              <!-- Collapse -->
               <div class="nav-item">
                 <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuPagesUsersMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="true" aria-controls="navbarVerticalMenuPagesUsersMenu">
                   <i class="bi-person-badge nav-icon"></i>
@@ -53,7 +52,19 @@
                   <a class="nav-link active" href="{{ url_for('main.items') }}">My Items</a>
                 </div>
               </div>
-              <!-- End Collapse -->
+            </div>
+            <!-- End Collapse -->
+            <div id="navbarVerticalMenuCollectionsMenu">
+              <div class="nav-item">
+                <a class="nav-link dropdown-toggle" href="#navbarVerticalMenuCollectionsUsersMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuCollectionsUsersMenu" aria-expanded="true" aria-controls="navbarVerticalMenuCollectionsUsersMenu">
+                  <i class="bi-person-badge nav-icon"></i>
+                  <span class="nav-link-title">Collections</span>
+                </a>
+
+                <div id="navbarVerticalMenuCollectionsUsersMenu" class="nav-collapse collapse show" data-bs-parent="#navbarVerticalMenuCollectionsMenu">
+                  <a class="nav-link" href="{{ url_for('main.collections') }}">My Collections</a>
+                </div>
+              </div>
             </div>
             <!-- End Collapse -->
           </div>

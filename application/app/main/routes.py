@@ -31,4 +31,12 @@ def items():
     """
     Route and method for rendering the items page.
     """
-    return render_template('internal/items.html', title='All Items')
+    return render_template('internal/items.html', title='My Items')
+
+@bp.route('/collections', methods=['GET', 'POST'])
+@login_required
+def collections():
+    """
+    Route and method for rendering the collections page.
+    """
+    return render_template('internal/collections.html', title='My Collections')
