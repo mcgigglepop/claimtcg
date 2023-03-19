@@ -52,6 +52,15 @@ class Collection(db.Model):
     def __repr__(self):
         return '<Collection {}>'.format(self.collectionName)
     
+# Collections Model
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tagName = db.Column(db.String(140), index=True)
+    collectionId = db.Column(db.Integer)
+    
+    def __repr__(self):
+        return '<Tag {}>'.format(self.tagName)
+    
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
