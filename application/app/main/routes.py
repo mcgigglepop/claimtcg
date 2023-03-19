@@ -40,3 +40,11 @@ def collections():
     Route and method for rendering the collections page.
     """
     return render_template('internal/collections.html', title='My Collections')
+
+@bp.route('/create-collection', methods=['GET', 'POST'])
+@login_required
+def createCollection():
+    """
+    Route and method for rendering the create collection page.
+    """
+    return render_template('internal/create-collection.html', title='Create Collection')
