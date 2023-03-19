@@ -52,13 +52,25 @@ def createCollection():
     """
     if request.method=='GET':
         
-        collections_and_tags = db.session.query(Collection, Tag).join(Tag, Collection.id==Tag.collectionId).filter(Collection.user_id==current_user.id).all()
+        collectionTags = db.session.query(Collection, Tag).join(Tag, Collection.id==Tag.collectionId).filter(Collection.user_id==current_user.id).all()
 
-        # Print the results to check
-        for c, t in collections_and_tags:
-            print("Collection ID: ", c.id, "Collection Name: ", c.collectionName, "Tag: ", t.tagName)
+        collectionsDictionary = {}
 
-        return render_template('internal/create-collection.html', title='Create Collection')
+        for c, t in collectionTags:
+            if c.id not in collectionsDictionary:
+                collectionsDictionary[c.id] = {
+                    'collection_id': c.id,
+                    'collection_name': c.collectionName,
+                    'visibility_type': c.visibilityType,
+                    'collection_type': c.collectionType,
+                    'tags': []
+                }
+            collectionsDictionary[c.id]['tags'].append(t.tagName)
+
+        # Convert dictionary to JSON object
+        collectionJson = json.dumps(list(collectionsDictionary.values()))
+
+        return render_template('internal/create-collection.html', collections=collectionJson, title='Create Collection')
     else:
         collectionName = request.form.get('collectionName')
         visibilityType = request.form.get('visibilityType')
