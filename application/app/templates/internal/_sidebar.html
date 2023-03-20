@@ -43,14 +43,22 @@
             </div>
             <div id="navbarVerticalMenuPagesMenu">
               <div class="nav-item">
-                <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuPagesUsersMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="true" aria-controls="navbarVerticalMenuPagesUsersMenu">
+                <a class="nav-link dropdown-toggle" href="#navbarVerticalMenuPagesUsersMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="true" aria-controls="navbarVerticalMenuPagesUsersMenu">
                   <i class="bi-person-badge nav-icon"></i>
                   <span class="nav-link-title">Items</span>
                 </a>
 
                 <div id="navbarVerticalMenuPagesUsersMenu" class="nav-collapse collapse show" data-bs-parent="#navbarVerticalMenuPagesMenu">
-                  <a class="nav-link active" href="{{ url_for('main.items') }}">My Items</a>
-                  <a class="nav-link" href="{{ url_for('main.addItem') }}">Add Item</a>
+                  {% if 'items' in request.path %}
+                    <a class="nav-link active" href="{{ url_for('main.items') }}">My Items</a>
+                  {% else %}
+                    <a class="nav-link " href="{{ url_for('main.items') }}">My Items</a>
+                  {% endif %}
+                  {% if 'add-item' in request.path %}
+                    <a class="nav-link active" href="{{ url_for('main.addItem') }}">Add Item</a>
+                  {% else %}
+                    <a class="nav-link" href="{{ url_for('main.addItem') }}">Add Item</a>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -63,8 +71,16 @@
                 </a>
 
                 <div id="navbarVerticalMenuCollectionsUsersMenu" class="nav-collapse collapse show" data-bs-parent="#navbarVerticalMenuCollectionsMenu">
-                  <a class="nav-link" href="{{ url_for('main.collections') }}">My Collections</a>
-                  <a class="nav-link" href="{{ url_for('main.createCollection') }}">Create Collection</a>
+                  {% if 'collections' in request.path %}
+                    <a class="nav-link active" href="{{ url_for('main.collections') }}">My Collections</a>
+                  {% else %}
+                    <a class="nav-link" href="{{ url_for('main.collections') }}">My Collections</a>
+                  {% endif %}
+                  {% if 'create-collection' in request.path %}
+                    <a class="nav-link active" href="{{ url_for('main.createCollection') }}">Create Collection</a>
+                  {% else %}
+                    <a class="nav-link" href="{{ url_for('main.createCollection') }}">Create Collection</a>
+                  {% endif %}
                 </div>
               </div>
             </div>
