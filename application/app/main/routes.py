@@ -45,7 +45,8 @@ def addItem():
     """
     Route and method for rendering the items page.
     """
-    return render_template('internal/add-item.html', title='Add Item')
+    userCollections = db.session.query(Collection).filter(Collection.user_id==current_user.id).all()
+    return render_template('internal/add-item.html', collections=userCollections, title='Add Item')
 
 @bp.route('/collections', methods=['GET', 'POST'])
 @login_required
