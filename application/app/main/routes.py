@@ -1,9 +1,12 @@
 from app.main import bp
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
+from sqlalchemy import func, select, text
 import json
 from app import db
-from app.models import Collection, Tag
+from app.models import Collection, Tag, Item
+
+from sqlalchemy.orm import aliased
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
@@ -41,24 +44,24 @@ def items():
 def collections():
     """
     Route and method for rendering the collections page.
-    """
-    collections_and_tags = db.session.query(Collection, Tag).outerjoin(Tag, Collection.id==Tag.collectionId).filter(Collection.user_id==current_user.id).all()
-
-    collectionsDictionary = {}
-    print(collections_and_tags)
+    """    
+    collections_and_tags = db.session.query(Collection, Tag, Item).outerjoin(Tag, Collection.id==Tag.collectionId).outerjoin(Item, Collection.id==Item.collectionId).filter(Collection.user_id==current_user.id).all()
     
-    for c, t in collections_and_tags:
+    collectionsDictionary = {}
+
+    for c, t, i in collections_and_tags:
         if c.id not in collectionsDictionary:
             collectionsDictionary[c.id] = {
                 'collection_id': c.id,
                 'collection_name': c.collectionName,
                 'visibility_type': c.visibilityType,
                 'collection_type': c.collectionType,
-                'tags': []
+                'tags': [],
+                'item_count': 0 if i is None else i
             }
         if t is not None:        
             collectionsDictionary[c.id]['tags'].append(t.tagName)
-            
+
     return render_template('internal/collections.html', collections=list(collectionsDictionary.values()), title='My Collections')
 
 @bp.route('/create-collection', methods=['GET', 'POST'])
