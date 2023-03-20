@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     isVerified = db.Column(db.Boolean, default=False)
     collectionCount = db.Column(db.Integer, default=0)
     collections = db.relationship('Collection', backref='author', lazy='dynamic')
+    items = db.relationship('Item', backref='author', lazy='dynamic')
     
     def __repr__(self):
         return '<User {}>'.format(self.email)
@@ -53,7 +54,7 @@ class Collection(db.Model):
     def __repr__(self):
         return '<Collection {}>'.format(self.collectionName)
     
-# Collections Model
+# Tag Model
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tagName = db.Column(db.String(140), index=True)
@@ -61,6 +62,16 @@ class Tag(db.Model):
     
     def __repr__(self):
         return '<Tag {}>'.format(self.tagName)
+    
+# Item Model
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    itemName = db.Column(db.String(140), index=True)
+    collectionId = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Item {}>'.format(self.itemName)
     
 @login.user_loader
 def load_user(id):
