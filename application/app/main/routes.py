@@ -39,6 +39,14 @@ def items():
     """
     return render_template('internal/items.html', title='My Items')
 
+@bp.route('/add-item', methods=['GET', 'POST'])
+@login_required
+def addItem():
+    """
+    Route and method for rendering the items page.
+    """
+    return render_template('internal/add-item.html', title='Add Item')
+
 @bp.route('/collections', methods=['GET', 'POST'])
 @login_required
 def collections():

@@ -1,0 +1,941 @@
+{% extends "internal/base.html" %}
+
+{% block content %}
+<body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl footer-offset">
+    <script src="{{ url_for('static', filename='internal/js/hs.theme-appearance.js') }}"></script>
+    {% include 'internal/_header.html' %}
+    {% include 'internal/_sidebar.html' %}
+    
+
+ 
+    <main id="content" role="main" class="main mb-5">
+      <!-- Content -->
+      <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="row align-items-center">
+            <div class="col-sm mb-2 mb-sm-0">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-no-gutter">
+                  <li class="breadcrumb-item"><a class="breadcrumb-link" href="./ecommerce-products.html">Pages</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Items</li>
+                </ol>
+              </nav>
+  
+              <h1 class="page-header-title">Add Item</h1>
+  
+              <div class="mt-2">
+                <a class="text-body me-3" href="javascript:;">
+                  <i class="bi-clipboard me-1"></i> Duplicate
+                </a>
+                <a class="text-body" href="javascript:;">
+                  <i class="bi-eye me-1"></i> Preview
+                </a>
+              </div>
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+        </div>
+        <!-- End Page Header -->
+  
+        <div class="row">
+          <div class="col-lg-8 mb-3 mb-lg-0">
+             <!-- Card -->
+             <div class="card mb-3 mb-lg-5">
+              <!-- Header -->
+              <div class="card-header card-header-content-between">
+                <h4 class="card-header-title">Media</h4>
+  
+                <!-- Dropdown -->
+                <div class="dropdown">
+
+                  <div class="dropdown-menu dropdown-menu-end mt-1">
+                    <a class="dropdown-item" href="javascript:;" data-bs-toggle="modal" data-bs-target="#addImageFromURLModal">
+                      <i class="bi-link dropdown-item-icon"></i> Add image from URL
+                    </a>
+                    <a class="dropdown-item" href="javascript:;" data-bs-toggle="modal" data-bs-target="#embedVideoModal">
+                      <i class="bi-youtube dropdown-item-icon"></i> Embed video
+                    </a>
+                  </div>
+                </div>
+                <!-- End Dropdown -->
+              </div>
+              <!-- End Header -->
+  
+              <!-- Body -->
+              <div class="card-body">
+                <!-- Dropzone -->
+                <div id="attachFilesNewProjectLabel" class="js-dropzone dz-dropzone dz-dropzone-card">
+                  <div class="dz-message">
+                    <img class="avatar avatar-xl avatar-4x3 mb-3" src="./assets/svg/illustrations/oc-browse.svg" alt="Image Description" data-hs-theme-appearance="default">
+                    <img class="avatar avatar-xl avatar-4x3 mb-3" src="./assets/svg/illustrations-light/oc-browse.svg" alt="Image Description" data-hs-theme-appearance="dark">
+  
+                    <h5>Drag and drop your file here</h5>
+  
+                    <p class="mb-2">or</p>
+  
+                    <span class="btn btn-white btn-sm">Browse files</span>
+                  </div>
+                </div>
+                <!-- End Dropzone -->
+              </div>
+              <!-- Body -->
+            </div>
+            <!-- End Card -->
+            <!-- Card -->
+            <div class="card mb-3 mb-lg-5">
+              <!-- Header -->
+              <div class="card-header">
+                <h4 class="card-header-title">Item information</h4>
+              </div>
+              <!-- End Header -->
+  
+              <!-- Body -->
+              <div class="card-body">
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="productNameLabel" class="form-label">Name <i class="bi-question-circle text-body ms-1"></i></label>
+  
+                  <input type="text" class="form-control" name="productName" id="productNameLabel" placeholder="Shirt, t-shirts, etc." aria-label="Shirt, t-shirts, etc." value="Tiro track jacket">
+                </div>
+                <!-- End Form -->
+                <div class="mb-4">
+                  <label for="productNameLabel" class="form-label">Description</label>
+  
+                  <textarea id="exampleFormControlTextarea1" class="form-control" placeholder="Textarea field" rows="4"></textarea>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- Form -->
+                    <div class="mb-4">
+                      <label for="SKULabel" class="form-label">Set List</label>
+  
+                      <input type="text" class="form-control" name="SKU" id="SKULabel" placeholder="eg. 348121032" aria-label="eg. 348121032">
+                    </div>
+                    <!-- End Form -->
+                  </div>
+                  <!-- End Col -->
+  
+                  <div class="col-sm-6">
+                    <!-- Form -->
+                    <div class="mb-4">
+                      <label for="weightLabel" class="form-label">Graded</label>
+  
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="weightName" id="weightLabel" placeholder="0.0" aria-label="0.0">
+  
+                        
+                      </div>
+  
+                    </div>
+                    <!-- End Form -->
+                  </div>
+                  <!-- End Col -->
+                </div>
+                <div class="row">
+                  <div class="mb-4">
+                    <label for="collectionTypeLabel" class="form-label">Collection</label>
+                    <div class="mb-4">        
+                      <!-- Select -->
+                      <div class="tom-select-custom mb-3">
+                        <select class="js-select form-select" id="collectionTypeLabel" name="collectionType" autocomplete="off" data-hs-tom-select-options='{
+                                  "placeholder": "Select collection"
+                                }'>
+                          <option value="Custom Collection" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/af.svg" alt="Custom Collection" /><span class="text-truncate">Custom Collection</span></span>'>Custom Collection</option>
+                          <option value="AF" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/af.svg" alt="Afghanistan Flag" /><span class="text-truncate">Afghanistan</span></span>'>Afghanistan</option>
+                          <option value="AX" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ax.svg" alt="Aland Islands Flag" /><span class="text-truncate">Aland Islands</span></span>'>Aland Islands</option>
+                          <option value="AL" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/al.svg" alt="Albania Flag" /><span class="text-truncate">Albania</span></span>'>Albania</option>
+                          <option value="DZ" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/dz.svg" alt="Algeria Flag" /><span class="text-truncate">Algeria</span></span>'>Algeria</option>
+                          <option value="AS" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/as.svg" alt="American Samoa Flag" /><span class="text-truncate">American Samoa</span></span>'>American Samoa</option>
+                          <option value="AD" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ad.svg" alt="Andorra Flag" /><span class="text-truncate">Andorra</span></span>'>Andorra</option>
+                          <option value="AO" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ao.svg" alt="Angola Flag" /><span class="text-truncate">Angola</span></span>'>Angola</option>
+                          <option value="AI" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ai.svg" alt="Anguilla Flag" /><span class="text-truncate">Anguilla</span></span>'>Anguilla</option>
+                          <option value="AG" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ag.svg" alt="Antigua and Barbuda Flag" /><span class="text-truncate">Antigua and Barbuda</span></span>'>Antigua and Barbuda</option>
+                          <option value="AR" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ar.svg" alt="Argentina Flag" /><span class="text-truncate">Argentina</span></span>'>Argentina</option>
+                          <option value="AM" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/am.svg" alt="Armenia Flag" /><span class="text-truncate">Armenia</span></span>'>Armenia</option>
+                          <option value="AW" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/aw.svg" alt="Aruba Flag" /><span class="text-truncate">Aruba</span></span>'>Aruba</option>
+                          <option value="AU" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/au.svg" alt="Australia Flag" /><span class="text-truncate">Australia</span></span>'>Australia</option>
+                          <option value="AT" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/at.svg" alt="Austria Flag" /><span class="text-truncate">Austria</span></span>'>Austria</option>
+                          <option value="AZ" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/az.svg" alt="Azerbaijan Flag" /><span class="text-truncate">Azerbaijan</span></span>'>Azerbaijan</option>
+                          <option value="BS" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bs.svg" alt="Bahamas Flag" /><span class="text-truncate">Bahamas</span></span>'>Bahamas</option>
+                          <option value="BH" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bh.svg" alt="Bahrain Flag" /><span class="text-truncate">Bahrain</span></span>'>Bahrain</option>
+                          <option value="BD" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bd.svg" alt="Bangladesh Flag" /><span class="text-truncate">Bangladesh</span></span>'>Bangladesh</option>
+                          <option value="BB" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bb.svg" alt="Barbados Flag" /><span class="text-truncate">Barbados</span></span>'>Barbados</option>
+                          <option value="BY" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/by.svg" alt="Belarus Flag" /><span class="text-truncate">Belarus</span></span>'>Belarus</option>
+                          <option value="BE" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/be.svg" alt="Belgium Flag" /><span class="text-truncate">Belgium</span></span>'>Belgium</option>
+                          <option value="BZ" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bz.svg" alt="Belize Flag" /><span class="text-truncate">Belize</span></span>'>Belize</option>
+                          <option value="BJ" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bj.svg" alt="Benin Flag" /><span class="text-truncate">Benin</span></span>'>Benin</option>
+                          <option value="BM" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bm.svg" alt="Bermuda Flag" /><span class="text-truncate">Bermuda</span></span>'>Bermuda</option>
+                          <option value="BT" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bt.svg" alt="Bhutan Flag" /><span class="text-truncate">Bhutan</span></span>'>Bhutan</option>
+                          <option value="BO" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bo.svg" alt="Bolivia (Plurinational State of) Flag" /><span class="text-truncate">Bolivia (Plurinational State of)</span></span>'>Bolivia (Plurinational State of)</option>
+                          <option value="BQ" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bq.svg" alt="Bonaire, Sint Eustatius and Saba Flag" /><span class="text-truncate">Bonaire, Sint Eustatius and Saba</span></span>'>Bonaire, Sint Eustatius and Saba</option>
+                          <option value="BA" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ba.svg" alt="Bosnia and Herzegovina Flag" /><span class="text-truncate">Bosnia and Herzegovina</span></span>'>Bosnia and Herzegovina</option>
+                          <option value="BW" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bw.svg" alt="Botswana Flag" /><span class="text-truncate">Botswana</span></span>'>Botswana</option>
+                          <option value="BR" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/br.svg" alt="Brazil Flag" /><span class="text-truncate">Brazil</span></span>'>Brazil</option>
+                          <option value="IO" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/io.svg" alt="British Indian Ocean Territory Flag" /><span class="text-truncate">British Indian Ocean Territory</span></span>'>British Indian Ocean Territory</option>
+                          <option value="BN" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bn.svg" alt="Brunei Darussalam Flag" /><span class="text-truncate">Brunei Darussalam</span></span>'>Brunei Darussalam</option>
+                          <option value="BG" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bg.svg" alt="Bulgaria Flag" /><span class="text-truncate">Bulgaria</span></span>'>Bulgaria</option>
+                          <option value="BF" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bf.svg" alt="Burkina Faso Flag" /><span class="text-truncate">Burkina Faso</span></span>'>Burkina Faso</option>
+                          <option value="BI" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/bi.svg" alt="Burundi Flag" /><span class="text-truncate">Burundi</span></span>'>Burundi</option>
+                          <option value="CV" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cv.svg" alt="Cabo Verde Flag" /><span class="text-truncate">Cabo Verde</span></span>'>Cabo Verde</option>
+                          <option value="KH" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/kh.svg" alt="Cambodia Flag" /><span class="text-truncate">Cambodia</span></span>'>Cambodia</option>
+                          <option value="CM" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cm.svg" alt="Cameroon Flag" /><span class="text-truncate">Cameroon</span></span>'>Cameroon</option>
+                          <option value="CA" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ca.svg" alt="Canada Flag" /><span class="text-truncate">Canada</span></span>'>Canada</option>
+                          <option value="KY" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ky.svg" alt="Cayman Islands Flag" /><span class="text-truncate">Cayman Islands</span></span>'>Cayman Islands</option>
+                          <option value="CF" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cf.svg" alt="Central African Republic Flag" /><span class="text-truncate">Central African Republic</span></span>'>Central African Republic</option>
+                          <option value="TD" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/td.svg" alt="Chad Flag" /><span class="text-truncate">Chad</span></span>'>Chad</option>
+                          <option value="CL" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cl.svg" alt="Chile Flag" /><span class="text-truncate">Chile</span></span>'>Chile</option>
+                          <option value="CN" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cn.svg" alt="China Flag" /><span class="text-truncate">China</span></span>'>China</option>
+                          <option value="CX" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cx.svg" alt="Christmas Island Flag" /><span class="text-truncate">Christmas Island</span></span>'>Christmas Island</option>
+                          <option value="CC" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cc.svg" alt="Cocos (Keeling) Islands Flag" /><span class="text-truncate">Cocos (Keeling) Islands</span></span>'>Cocos (Keeling) Islands</option>
+                          <option value="CO" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/co.svg" alt="Colombia Flag" /><span class="text-truncate">Colombia</span></span>'>Colombia</option>
+                          <option value="KM" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/km.svg" alt="Comoros Flag" /><span class="text-truncate">Comoros</span></span>'>Comoros</option>
+                          <option value="CK" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ck.svg" alt="Cook Islands Flag" /><span class="text-truncate">Cook Islands</span></span>'>Cook Islands</option>
+                          <option value="CR" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cr.svg" alt="Costa Rica Flag" /><span class="text-truncate">Costa Rica</span></span>'>Costa Rica</option>
+                          <option value="HR" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/hr.svg" alt="Croatia Flag" /><span class="text-truncate">Croatia</span></span>'>Croatia</option>
+                          <option value="CU" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cu.svg" alt="Cuba Flag" /><span class="text-truncate">Cuba</span></span>'>Cuba</option>
+                          <option value="CW" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cw.svg" alt="Curaçao Flag" /><span class="text-truncate">Curaçao</span></span>'>Curaçao</option>
+                          <option value="CY" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cy.svg" alt="Cyprus Flag" /><span class="text-truncate">Cyprus</span></span>'>Cyprus</option>
+                          <option value="CZ" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cz.svg" alt="Czech Republic Flag" /><span class="text-truncate">Czech Republic</span></span>'>Czech Republic</option>
+                          <option value="CI" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ci.svg" alt=Côte d&apos;Ivoire Flag" /><span class="text-truncate">Côte d&apos;Ivoire</span></span>'>Côte d'Ivoire</option>
+                          <option value="CD" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/cd.svg" alt="Democratic Republic of the Congo Flag" /><span class="text-truncate">Democratic Republic of the Congo</span></span>'>Democratic Republic of the Congo</option>
+                          <option value="DK" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/dk.svg" alt="Denmark Flag" /><span class="text-truncate">Denmark</span></span>'>Denmark</option>
+                          <option value="DJ" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/dj.svg" alt="Djibouti Flag" /><span class="text-truncate">Djibouti</span></span>'>Djibouti</option>
+                          <option value="DM" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/dm.svg" alt="Dominica Flag" /><span class="text-truncate">Dominica</span></span>'>Dominica</option>
+                          <option value="DO" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/do.svg" alt="Dominican Republic Flag" /><span class="text-truncate">Dominican Republic</span></span>'>Dominican Republic</option>
+                          <option value="EC" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/ec.svg" alt="Ecuador Flag" /><span class="text-truncate">Ecuador</span></span>'>Ecuador</option>
+                          <option value="EG" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/eg.svg" alt="Egypt Flag" /><span class="text-truncate">Egypt</span></span>'>Egypt</option>
+                          <option value="SV" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="./assets/vendor/flag-icon-css/flags/1x1/sv.svg" alt="El Salvador Flag" /><span class="text-truncate">El Salvador</span></span>'>El Salvador</option>
+                      </select>
+                      </div>
+                      <!-- End Select -->
+      
+                    
+                    </div>
+                    <!-- End Form -->
+                  </div>
+                </div>
+                <!-- End Row -->
+  
+  
+
+              </div>
+              <!-- Body -->
+            </div>
+            <!-- End Card -->
+  
+           
+  
+            <!-- Card -->
+            <div class="card">
+              <!-- Header -->
+              <div class="card-header">
+                <h4 class="card-header-title">Custom Attributes</h4>
+              </div>
+              <!-- End Header -->
+  
+              <!-- Body -->
+              <div class="card-body">
+                <h6 class="text-cap">Options</h6>
+  
+                <div class="js-add-field" data-hs-add-field-options='{
+                      "template": "#addAnotherOptionFieldTemplate",
+                      "container": "#addAnotherOptionFieldContainer",
+                      "defaultCreated": 0
+                    }'>
+                  <div class="row mb-4">
+                    <div class="col-sm-4 mb-2 mb-sm-0">
+                      <input type="text" class="form-control" placeholder="Enter tags" aria-label="Enter tags">
+                    </div>
+                    <!-- End Col -->
+  
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" placeholder="Enter tags" aria-label="Enter tags">
+                    </div>
+                    <!-- End Col -->
+                  </div>
+                  <!-- End Row -->
+  
+                  <!-- Container For Input Field -->
+                  <div id="addAnotherOptionFieldContainer"></div>
+  
+                  <a href="javascript:;" class="js-create-field form-link">
+                    <i class="bi-plus"></i> Add another option
+                  </a>
+                </div>
+  
+                <!-- Add Another Option Input Field -->
+                <div id="addAnotherOptionFieldTemplate" style="display: none;">
+                  <div class="row mb-4">
+                    <div class="col-sm-4 mb-2 mb-sm-0">
+                      <input type="text" class="form-control" placeholder="Enter tags" aria-label="Enter tags">
+                    </div>
+                    <!-- End Col -->
+  
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" placeholder="Enter tags" aria-label="Enter tags">
+                    </div>
+                    <!-- End Col -->
+                  </div>
+                  <!-- End Row -->
+                </div>
+                <!-- End Add Another Option Input Field -->
+              </div>
+              <!-- Body -->
+            </div>
+            <!-- End Card -->
+          </div>
+          <!-- End Col -->
+  
+          <div class="col-lg-4">
+            <!-- Card -->
+            <div class="card mb-3 mb-lg-5">
+              <!-- Header -->
+              <div class="card-header">
+                <h4 class="card-header-title">Pricing</h4>
+              </div>
+              <!-- End Header -->
+  
+              <!-- Body -->
+              <div class="card-body">
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="priceNameLabel" class="form-label">Price</label>
+  
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="priceName" id="priceNameLabel" placeholder="0.00" aria-label="0.00">
+  
+                    <div class="input-group-append">
+                      <!-- Select -->
+                      <div class="tom-select-custom">
+                        <select class="js-select form-select" data-hs-tom-select-options='{
+                                  "searchInDropdown": false,
+                                  "hideSearch": true,
+                                  "dropdownWidth": "7rem",
+                                  "dropdownWrapperClass": "tom-select-custom tom-select-custom-end"
+                                }'>
+                          <option value="USD" selected>USD</option>
+                          <option value="AED">AED</option>
+                          <option value="AFN">AFN</option>
+                          <option value="ALL">ALL</option>
+                          <option value="AMD">AMD</option>
+                          <option value="ANG">ANG</option>
+                          <option value="AOA">AOA</option>
+                          <option value="ARS">ARS</option>
+                          <option value="AUD">AUD</option>
+                          <option value="AWG">AWG</option>
+                          <option value="AZN">AZN</option>
+                          <option value="BAM">BAM</option>
+                          <option value="BBD">BBD</option>
+                          <option value="BDT">BDT</option>
+                          <option value="BGN">BGN</option>
+                          <option value="BIF">BIF</option>
+                          <option value="BMD">BMD</option>
+                          <option value="BND">BND</option>
+                          <option value="BOB">BOB</option>
+                          <option value="BRL">BRL</option>
+                          <option value="BSD">BSD</option>
+                          <option value="BWP">BWP</option>
+                          <option value="BZD">BZD</option>
+                          <option value="CAD">CAD</option>
+                          <option value="CDF">CDF</option>
+                          <option value="CHF">CHF</option>
+                          <option value="CLP">CLP</option>
+                          <option value="CNY">CNY</option>
+                          <option value="COP">COP</option>
+                          <option value="CRC">CRC</option>
+                          <option value="CVE">CVE</option>
+                          <option value="CZK">CZK</option>
+                          <option value="DJF">DJF</option>
+                          <option value="DKK">DKK</option>
+                          <option value="DOP">DOP</option>
+                          <option value="DZD">DZD</option>
+                          <option value="EGP">EGP</option>
+                          <option value="ETB">ETB</option>
+                          <option value="EUR">EUR</option>
+                          <option value="FJD">FJD</option>
+                          <option value="FKP">FKP</option>
+                          <option value="GBP">GBP</option>
+                          <option value="GEL">GEL</option>
+                          <option value="GIP">GIP</option>
+                          <option value="GMD">GMD</option>
+                          <option value="GNF">GNF</option>
+                          <option value="GTQ">GTQ</option>
+                          <option value="GYD">GYD</option>
+                          <option value="HKD">HKD</option>
+                          <option value="HNL">HNL</option>
+                          <option value="HRK">HRK</option>
+                          <option value="HTG">HTG</option>
+                          <option value="HUF">HUF</option>
+                          <option value="IDR">IDR</option>
+                          <option value="ILS">ILS</option>
+                          <option value="INR">INR</option>
+                          <option value="ISK">ISK</option>
+                          <option value="JMD">JMD</option>
+                          <option value="JPY">JPY</option>
+                          <option value="KES">KES</option>
+                          <option value="KGS">KGS</option>
+                          <option value="KHR">KHR</option>
+                          <option value="KMF">KMF</option>
+                          <option value="KRW">KRW</option>
+                          <option value="KYD">KYD</option>
+                          <option value="KZT">KZT</option>
+                          <option value="LAK">LAK</option>
+                          <option value="LBP">LBP</option>
+                          <option value="LKR">LKR</option>
+                          <option value="LRD">LRD</option>
+                          <option value="LSL">LSL</option>
+                          <option value="MAD">MAD</option>
+                          <option value="MDL">MDL</option>
+                          <option value="MGA">MGA</option>
+                          <option value="MKD">MKD</option>
+                          <option value="MMK">MMK</option>
+                          <option value="MNT">MNT</option>
+                          <option value="MOP">MOP</option>
+                          <option value="MRO">MRO</option>
+                          <option value="MUR">MUR</option>
+                          <option value="MVR">MVR</option>
+                          <option value="MWK">MWK</option>
+                          <option value="MXN">MXN</option>
+                          <option value="MYR">MYR</option>
+                          <option value="MZN">MZN</option>
+                          <option value="NAD">NAD</option>
+                          <option value="NGN">NGN</option>
+                          <option value="NIO">NIO</option>
+                          <option value="NOK">NOK</option>
+                          <option value="NPR">NPR</option>
+                          <option value="NZD">NZD</option>
+                          <option value="PAB">PAB</option>
+                          <option value="PEN">PEN</option>
+                          <option value="PGK">PGK</option>
+                          <option value="PHP">PHP</option>
+                          <option value="PKR">PKR</option>
+                          <option value="PLN">PLN</option>
+                          <option value="PYG">PYG</option>
+                          <option value="QAR">QAR</option>
+                          <option value="RON">RON</option>
+                          <option value="RSD">RSD</option>
+                          <option value="RUB">RUB</option>
+                          <option value="RWF">RWF</option>
+                          <option value="SAR">SAR</option>
+                          <option value="SBD">SBD</option>
+                          <option value="SCR">SCR</option>
+                          <option value="SEK">SEK</option>
+                          <option value="SGD">SGD</option>
+                          <option value="SHP">SHP</option>
+                          <option value="SLL">SLL</option>
+                          <option value="SOS">SOS</option>
+                          <option value="SRD">SRD</option>
+                          <option value="STD">STD</option>
+                          <option value="SZL">SZL</option>
+                          <option value="THB">THB</option>
+                          <option value="TJS">TJS</option>
+                          <option value="TOP">TOP</option>
+                          <option value="TRY">TRY</option>
+                          <option value="TTD">TTD</option>
+                          <option value="TWD">TWD</option>
+                          <option value="TZS">TZS</option>
+                          <option value="UAH">UAH</option>
+                          <option value="UGX">UGX</option>
+                          <option value="UYU">UYU</option>
+                          <option value="UZS">UZS</option>
+                          <option value="VND">VND</option>
+                          <option value="VUV">VUV</option>
+                          <option value="WST">WST</option>
+                          <option value="XAF">XAF</option>
+                          <option value="XCD">XCD</option>
+                          <option value="XOF">XOF</option>
+                          <option value="XPF">XPF</option>
+                          <option value="YER">YER</option>
+                          <option value="ZAR">ZAR</option>
+                          <option value="ZMW">ZMW</option>
+                        </select>
+                      </div>
+                      <!-- End Select -->
+                    </div>
+                  </div>
+                </div>
+                <!-- End Form -->
+  
+                
+  
+                <hr class="my-4">
+  
+                <!-- Form Switch -->
+                <label class="row form-check form-switch" for="availabilitySwitch1">
+                  <span class="col-8 col-sm-9 ms-0">
+                    <span class="text-dark">List Item <i class="bi-question-circle text-body ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="List Item for sale on marketplace"></i></span>
+                  </span>
+                  <span class="col-4 col-sm-3 text-end">
+                    <input type="checkbox" class="form-check-input" id="availabilitySwitch1">
+                  </span>
+                </label>
+                <!-- End Form Switch -->
+              </div>
+              <!-- Body -->
+            </div>
+            <!-- End Card -->
+  
+            <!-- Card -->
+            <div class="card">
+              <!-- Header -->
+              <div class="card-header">
+                <h4 class="card-header-title">Market Price and History</h4>
+              </div>
+              <!-- End Header -->
+  
+              <!-- Body -->
+              <div class="card-body">
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="vendorLabel" class="form-label">Purchase Price</label>
+  
+                  <input type="text" class="form-control" name="vendor" id="vendorLabel" placeholder="eg. Nike" aria-label="eg. Nike">
+                </div>
+                <!-- End Form -->
+                
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="collectionsLabel" class="form-label">Acquired From/Provenance</label>
+  
+                  <!-- Select -->
+                  <div class="tom-select-custom">
+                    <select class="js-select form-select" autocomplete="off" id="collectionsLabel" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                              "hideSearch": true,
+                              "placeholder": "Select collections"
+                            }'>
+                      <option value="Public Auction">Public Auction</option>0
+                      <option value="Private Transaction">Private Transaction</option>
+                      <option value="Heritage">Heritage</option>
+                      <option value="Ebay">Ebay</option>
+                      <option value="PWCC">PWCC</option>
+                      <option value="Goldin">Goldin</option>
+                      <option value="Facebook">Facebook</option>
+                      <option value="Instagram">Instagram</option>
+                      <option value="Other">Other</option>
+
+                    </select>
+                  </div>
+                  <!-- End Select -->
+  
+                  <span class="form-text">Add where you acquired this item to help with authenticity.</span>
+                </div>
+                <!-- Form -->
+  
+                
+              </div>
+              <!-- Body -->
+            </div>
+            <!-- End Card -->
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Row -->
+  
+        <div class="position-fixed start-50 bottom-0 translate-middle-x w-100 zi-99 mb-3" style="max-width: 40rem;">
+          <!-- Card -->
+          <div class="card card-sm bg-dark border-dark mx-2">
+            <div class="card-body">
+              <div class="row justify-content-center justify-content-sm-between">
+                <div class="col">
+                  <button type="button" class="btn btn-ghost-danger">Delete</button>
+                </div>
+                <!-- End Col -->
+  
+                <div class="col-auto">
+                  <div class="d-flex gap-3">
+                    <button type="button" class="btn btn-ghost-light">Discard</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                  </div>
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+            </div>
+          </div>
+          <!-- End Card -->
+        </div>
+      </div>
+      <!-- End Content -->
+  
+      <!-- Footer -->
+  
+      <div class="footer">
+        <div class="row justify-content-between align-items-center">
+          <div class="col">
+            <p class="fs-6 mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2022 Htmlstream.</span></p>
+          </div>
+          <!-- End Col -->
+  
+          <div class="col-auto">
+            <div class="d-flex justify-content-end">
+              <!-- List Separator -->
+              <ul class="list-inline list-separator">
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">FAQ</a>
+                </li>
+  
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">License</a>
+                </li>
+  
+                <li class="list-inline-item">
+                  <!-- Keyboard Shortcuts Toggle -->
+                  <button class="btn btn-ghost-secondary btn btn-icon btn-ghost-secondary rounded-circle" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasKeyboardShortcuts" aria-controls="offcanvasKeyboardShortcuts">
+                    <i class="bi-command"></i>
+                  </button>
+                  <!-- End Keyboard Shortcuts Toggle -->
+                </li>
+              </ul>
+              <!-- End List Separator -->
+            </div>
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Row -->
+      </div>
+  
+      <!-- End Footer -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="{{ url_for('static', filename='internal/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js') }}"></script>
+  <!-- JS Global Compulsory  -->
+  <script src="{{ url_for('static', filename='internal/vendor/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/jquery-migrate/dist/jquery-migrate.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+
+  <!-- JS Implementing Plugins -->
+  <script src="{{ url_for('static', filename='internal/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/hs-form-search/dist/hs-form-search.min.js') }}"></script>
+
+  <script src="{{ url_for('static', filename='internal/vendor/hs-toggle-password/dist/js/hs-toggle-password.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/hs-file-attach/dist/hs-file-attach.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/hs-nav-scroller/dist/hs-nav-scroller.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/hs-step-form/dist/hs-step-form.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/hs-counter/dist/hs-counter.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/appear/dist/appear.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/imask/dist/imask.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/tom-select/dist/js/tom-select.complete.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/datatables.net.extensions/select/select.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/jszip/dist/jszip.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/pdfmake/build/pdfmake.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/pdfmake/build/vfs_fonts.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='internal/vendor/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
+
+  <script src="{{ url_for('static', filename='internal/vendor/hs-add-field/dist/hs-add-field.min.js') }}"></script>
+
+  <!-- JS Front -->
+  <script src="{{ url_for('static', filename='internal/js/theme.min.js') }}"></script>
+
+  <!-- JS Plugins Init. -->
+  <script>
+    $(document).on('ready', function () {
+      // INITIALIZATION OF DATATABLES
+      // =======================================================
+      HSCore.components.HSDatatables.init($('#datatable'), {
+        dom: 'Bfrtip',
+        buttons: [
+          {
+            extend: 'copy',
+            className: 'd-none'
+          },
+          {
+            extend: 'excel',
+            className: 'd-none'
+          },
+          {
+            extend: 'csv',
+            className: 'd-none'
+          },
+          {
+            extend: 'pdf',
+            className: 'd-none'
+          },
+          {
+            extend: 'print',
+            className: 'd-none'
+          },
+        ],
+        select: {
+          style: 'multi',
+          selector: 'td:first-child input[type="checkbox"]',
+          classMap: {
+            checkAll: '#datatableCheckAll',
+            counter: '#datatableCounter',
+            counterInfo: '#datatableCounterInfo'
+          }
+        },
+        language: {
+          zeroRecords: `<div class="text-center p-4">
+              <img class="mb-3" src="../static/internal/svg/illustrations/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="default">
+              <img class="mb-3" src="../static/internal/svg/illustrations-light/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="dark">
+            <p class="mb-0">No data to show</p>
+            </div>`
+        }
+      })
+
+      const datatable = HSCore.components.HSDatatables.getItem(0)
+
+      $('#export-copy').click(function() {
+        datatable.button('.buttons-copy').trigger()
+      });
+
+      $('#export-excel').click(function() {
+        datatable.button('.buttons-excel').trigger()
+      });
+
+      $('#export-csv').click(function() {
+        datatable.button('.buttons-csv').trigger()
+      });
+
+      $('#export-pdf').click(function() {
+        datatable.button('.buttons-pdf').trigger()
+      });
+
+      $('#export-print').click(function() {
+        datatable.button('.buttons-print').trigger()
+      });
+
+      $('.js-datatable-filter').on('change', function() {
+        var $this = $(this),
+          elVal = $this.val(),
+          targetColumnIndex = $this.data('target-column-index');
+
+        if (elVal === 'null') elVal = ''
+
+        datatable.column(targetColumnIndex).search(elVal).draw();
+      });
+    });
+  </script>
+
+  <!-- JS Plugins Init. -->
+  <script>
+    (function() {
+      window.onload = function () {
+        
+
+        // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+        // =======================================================
+        new HSSideNav('.js-navbar-vertical-aside').init()
+
+
+        // INITIALIZATION OF FORM SEARCH
+        // =======================================================
+        new HSFormSearch('.js-form-search')
+
+
+        // INITIALIZATION OF BOOTSTRAP DROPDOWN
+        // =======================================================
+        HSBsDropdown.init()
+
+
+        // INITIALIZATION OF SELECT
+        // =======================================================
+        HSCore.components.HSTomSelect.init('.js-select')
+
+
+        // INITIALIZATION OF INPUT MASK
+        // =======================================================
+        HSCore.components.HSMask.init('.js-input-mask')
+
+
+        // INITIALIZATION OF NAV SCROLLER
+        // =======================================================
+        new HsNavScroller('.js-nav-scroller')
+
+
+        // INITIALIZATION OF COUNTER
+        // =======================================================
+        new HSCounter('.js-counter')
+
+
+        // INITIALIZATION OF TOGGLE PASSWORD
+        // =======================================================
+        new HSTogglePassword('.js-toggle-password')
+
+
+        // INITIALIZATION OF FILE ATTACHMENT
+        // =======================================================
+        new HSFileAttach('.js-file-attach')
+      }
+    })()
+  </script>
+
+  <!-- Style Switcher JS -->
+
+  <script>
+      (function () {
+        // STYLE SWITCHER
+        // =======================================================
+        const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
+        const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
+
+        // Function to set active style in the dorpdown menu and set icon for dropdown trigger
+        const setActiveStyle = function () {
+          $variants.forEach($item => {
+            if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
+              $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
+              return $item.classList.add('active')
+            }
+
+            $item.classList.remove('active')
+          })
+        }
+
+        // Add a click event to all items of the dropdown to set the style
+        $variants.forEach(function ($item) {
+          $item.addEventListener('click', function () {
+            HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
+          })
+        })
+
+        // Call the setActiveStyle on load page
+        setActiveStyle()
+
+        // Add event listener on change style to call the setActiveStyle function
+        window.addEventListener('on-hs-appearance-change', function () {
+          setActiveStyle()
+        })
+      })()
+    </script>
+
+<script>
+    (function() {
+      window.onload = function () {
+        
+
+        // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+        // =======================================================
+        new HSSideNav('.js-navbar-vertical-aside').init()
+
+
+        // INITIALIZATION OF FORM SEARCH
+        // =======================================================
+        new HSFormSearch('.js-form-search')
+
+
+        // INITIALIZATION OF BOOTSTRAP DROPDOWN
+        // =======================================================
+        HSBsDropdown.init()
+
+
+        // INITIALIZATION OF SELECT
+        // =======================================================
+        HSCore.components.HSTomSelect.init('.js-select')
+
+
+        // INITIALIZATION OF ADD FIELD
+        // =======================================================
+        new HSAddField('.js-add-field', {
+          addedField: field => {
+            HSCore.components.HSTomSelect.init(field.querySelector('.js-select-dynamic'))
+            HSCore.components.HSMask.init(field.querySelector('.js-input-mask'))
+          }
+        })
+
+
+        // INITIALIZATION OF INPUT MASK
+        // =======================================================
+        HSCore.components.HSMask.init('.js-input-mask')
+      }
+    })()
+  </script>
+
+  <!-- Style Switcher JS -->
+
+  <script>
+      (function () {
+        // STYLE SWITCHER
+        // =======================================================
+        const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
+        const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
+
+        // Function to set active style in the dorpdown menu and set icon for dropdown trigger
+        const setActiveStyle = function () {
+          $variants.forEach($item => {
+            if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
+              $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
+              return $item.classList.add('active')
+            }
+
+            $item.classList.remove('active')
+          })
+        }
+
+        // Add a click event to all items of the dropdown to set the style
+        $variants.forEach(function ($item) {
+          $item.addEventListener('click', function () {
+            HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
+          })
+        })
+
+        // Call the setActiveStyle on load page
+        setActiveStyle()
+
+        // Add event listener on change style to call the setActiveStyle function
+        window.addEventListener('on-hs-appearance-change', function () {
+          setActiveStyle()
+        })
+      })()
+    </script>
+
+  <!-- End Style Switcher JS -->
+</body>
+{% endblock %}
