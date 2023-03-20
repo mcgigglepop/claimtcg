@@ -42,14 +42,11 @@ def collections():
     """
     Route and method for rendering the collections page.
     """
-    collectionTags = db.session.query(Collection, Tag).join(Tag, Collection.id==Tag.collectionId).filter(Collection.user_id==current_user.id).all()
-
     collections_and_tags = db.session.query(Collection, Tag).outerjoin(Tag, Collection.id==Tag.collectionId).filter(Collection.user_id==current_user.id).all()
 
     collectionsDictionary = {}
     print(collections_and_tags)
     
-
     for c, t in collections_and_tags:
         if c.id not in collectionsDictionary:
             collectionsDictionary[c.id] = {
@@ -61,6 +58,7 @@ def collections():
             }
         if t is not None:        
             collectionsDictionary[c.id]['tags'].append(t.tagName)
+            
     return render_template('internal/collections.html', collections=list(collectionsDictionary.values()), title='My Collections')
 
 @bp.route('/create-collection', methods=['GET', 'POST'])
