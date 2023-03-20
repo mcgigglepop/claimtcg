@@ -1,5 +1,5 @@
 from app.main import bp
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 import json
 from app import db
@@ -42,7 +42,26 @@ def collections():
     """
     Route and method for rendering the collections page.
     """
-    return render_template('internal/collections.html', title='My Collections')
+    collectionTags = db.session.query(Collection, Tag).join(Tag, Collection.id==Tag.collectionId).filter(Collection.user_id==current_user.id).all()
+
+    collections_and_tags = db.session.query(Collection, Tag).outerjoin(Tag, Collection.id==Tag.collectionId).filter(Collection.user_id==current_user.id).all()
+
+    collectionsDictionary = {}
+    print(collections_and_tags)
+    
+
+    for c, t in collections_and_tags:
+        if c.id not in collectionsDictionary:
+            collectionsDictionary[c.id] = {
+                'collection_id': c.id,
+                'collection_name': c.collectionName,
+                'visibility_type': c.visibilityType,
+                'collection_type': c.collectionType,
+                'tags': []
+            }
+        if t is not None:        
+            collectionsDictionary[c.id]['tags'].append(t.tagName)
+    return render_template('internal/collections.html', collections=list(collectionsDictionary.values()), title='My Collections')
 
 @bp.route('/create-collection', methods=['GET', 'POST'])
 @login_required
@@ -51,35 +70,18 @@ def createCollection():
     Route and method for rendering the create collection page.
     """
     if request.method=='GET':
-        
-        collectionTags = db.session.query(Collection, Tag).join(Tag, Collection.id==Tag.collectionId).filter(Collection.user_id==current_user.id).all()
-
-        collectionsDictionary = {}
-
-        for c, t in collectionTags:
-            if c.id not in collectionsDictionary:
-                collectionsDictionary[c.id] = {
-                    'collection_id': c.id,
-                    'collection_name': c.collectionName,
-                    'visibility_type': c.visibilityType,
-                    'collection_type': c.collectionType,
-                    'tags': []
-                }
-            collectionsDictionary[c.id]['tags'].append(t.tagName)
-
-        # Convert dictionary to JSON object
-        collectionJson = json.dumps(list(collectionsDictionary.values()))
-
-        return render_template('internal/create-collection.html', collections=collectionJson, title='Create Collection')
+        return render_template('internal/create-collection.html', title='Create Collection')
     else:
         collectionName = request.form.get('collectionName')
         visibilityType = request.form.get('visibilityType')
         collectionType = request.form.get('collectionType')
 
         collection = Collection(collectionName=collectionName, visibilityType=visibilityType, collectionType=collectionType, author=current_user)
-
+        
+        db.session.add(collection)
         db.session.flush()
         tagObjects = []
+
 
         if request.form.get('tag'): tagObjects.append(Tag(tagName=request.form.get('tag'), collectionId=collection.id))
         if request.form.get('tagLine_0'): tagObjects.append(Tag(tagName=request.form.get('tagLine_0'), collectionId=collection.id))
@@ -91,4 +93,4 @@ def createCollection():
         db.session.bulk_save_objects(tagObjects)
         db.session.commit()
 
-        return render_template('internal/create-collection.html', title='Create Collection')
+        return redirect(url_for('main.collections'))
