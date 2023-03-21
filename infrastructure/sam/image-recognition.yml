@@ -109,3 +109,21 @@ Resources:
       Description: To kick stepfunctions off.
       Name: CreateStateMachineAndTokenAPI
     Type: AWS::ApiGateway::RestApi
+  CreateStateMachineAndToken:
+    Properties:
+      CodeUri: ../code/
+      Description: 'Lambda function to Create StateMachine And Token'
+      Environment:
+        Variables:
+          stepfunctions_arn:
+            Fn::Sub: arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:PollToPushREST
+          worker_arn:
+            Fn::Sub: arn:aws:states:${AWS::Region}:${AWS::AccountId}:activity:OpenConnection
+      FunctionName: CreateStateMachineAndToken
+      Handler: create-state-machine-and-token.lambda_handler
+      Role:
+        Fn::GetAtt:
+        - MyLambdaRole
+        - Arn
+      Runtime: python3.7
+    Type: AWS::Serverless::Function
