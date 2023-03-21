@@ -141,4 +141,42 @@ Resources:
         - Arn
       Runtime: python3.7
     Type: AWS::Serverless::Function
+  RecognitionStateMachine:
+    Properties:
+      DefinitionString:
+        Fn::Sub: |-
+          {
+            "Comment": "ImageRecognitionStateMachine",
+            "StartAt": "RunImageRecognition",
+            "States": {
+                      "RunImageRecognition": {
+                      "Type": "Task",
+                      "Resource":"arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:ImageRecognition-Rekognition",
+                      "Next" : "IssueCallback"
+                      },
+                       "IssueCallback": {
+                        "Type": "Task",
+                        "Parameters": {
+                          "myArn.$":"$$.Execution.Id",
+                          "myPayload.$":"$"
+                        },
+                        "Resource":"arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:SendMessageToClient",
+                        "Retry": [
+                          {
+                        "ErrorEquals": ["DynamoRecordDoesNotExist"],
+                        "IntervalSeconds": 5,
+                        "MaxAttempts": 5,
+                        "BackoffRate": 2.0
+                      }
+                        ],
+                        "End":true
+                      }
+            }
+          }
+      RoleArn:
+        Fn::GetAtt:
+        - StatesExecutionRole
+        - Arn
+      StateMachineName: ImageRecognitionREST
+    Type: AWS::StepFunctions::StateMachine
   
