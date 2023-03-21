@@ -202,4 +202,24 @@ Resources:
       Runtime: python3.7
       Timeout: 300
     Type: AWS::Serverless::Function
+  UpdateClientFunction:
+    Properties:
+      CodeUri: ../code/
+      Description: update connected client with StepFunction outcome.
+      Environment:
+        Variables:
+          callbackURL:
+            Fn::Sub: https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/${ImageRecognitionStage}
+          stepfunctions_arn:
+            Fn::Sub: arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:ImageRecognitionREST
+      FunctionName: SendMessageToClient
+      Handler: sendMessageToClient.lambda_handler
+      Layers:
+      - Ref: LambdaLayer
+      Role:
+        Fn::GetAtt:
+        - ImageRecognitionRole
+        - Arn
+      Runtime: python3.7
+    Type: AWS::Serverless::Function
   
