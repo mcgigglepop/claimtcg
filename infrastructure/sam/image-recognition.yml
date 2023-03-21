@@ -5,4 +5,122 @@ Description: A SAM template for deploying Image Recognition API.
 Resources:
   ImagesBucket:
     Type: AWS::S3::Bucket
+  PollerAPI:
+    Properties:
+      Body:
+        basePath: /Demo
+        definitions:
+          Empty:
+            title: Empty Schema
+            type: object
+        info:
+          title: CreateStateMachineAndTokenAPI
+          version: '2019-03-01T09:15:33Z'
+        paths:
+          /CreateStateMachineAndToken:
+            get:
+              parameters:
+              - in: query
+                name: ExecutionArn
+                required: true
+                type: string
+              produces:
+              - application/json
+              responses:
+                '200':
+                  description: 200 response
+                  headers:
+                    Access-Control-Allow-Origin:
+                      type: string
+                  schema:
+                    $ref: '#/definitions/Empty'
+              x-amazon-apigateway-integration:
+                contentHandling: CONVERT_TO_TEXT
+                httpMethod: POST
+                passthroughBehavior: when_no_match
+                responses:
+                  default:
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Origin: '''*'''
+                    statusCode: '200'
+                type: aws_proxy
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:ImageRecognition_GetActivityStatus/invocations
+            options:
+              consumes:
+              - application/json
+              produces:
+              - application/json
+              responses:
+                '200':
+                  description: 200 response
+                  headers:
+                    Access-Control-Allow-Headers:
+                      type: string
+                    Access-Control-Allow-Methods:
+                      type: string
+                    Access-Control-Allow-Origin:
+                      type: string
+                  schema:
+                    $ref: '#/definitions/Empty'
+              x-amazon-apigateway-integration:
+                passthroughBehavior: when_no_match
+                requestTemplates:
+                  application/json: '{"statusCode": 200}'
+                responses:
+                  default:
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'''
+                      method.response.header.Access-Control-Allow-Methods: '''POST,OPTIONS'''
+                      method.response.header.Access-Control-Allow-Origin: '''*'''
+                    statusCode: '200'
+                type: mock
+            post:
+              parameters:
+              - in: query
+                name: Country
+                required: false
+                type: string
+              produces:
+              - application/json
+              responses:
+                '200':
+                  description: 200 response
+                  headers:
+                    Access-Control-Allow-Origin:
+                      type: string
+                  schema:
+                    $ref: '#/definitions/Empty'
+              x-amazon-apigateway-integration:
+                contentHandling: CONVERT_TO_TEXT
+                httpMethod: POST
+                passthroughBehavior: when_no_match
+                responses:
+                  default:
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Origin: '''*'''
+                    statusCode: '200'
+                type: aws_proxy
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:CreateStateMachineAndToken/invocations
+        schemes:
+        - https
+        swagger: '2.0'
+      Description: To kick stepfunctions off.
+      Name: CreateStateMachineAndTokenAPI
+    Type: AWS::ApiGateway::RestApi
+  ApiStage:
+    Properties:
+      DeploymentId:
+        Ref: ApiDeployment
+      RestApiId:
+        Ref: PollerAPI
+      StageName: ImageRecognition
+    Type: AWS::ApiGateway::Stage
+  ApiDeployment:
+    Properties:
+      Description: A deployment of the PollerAPI
+      RestApiId:
+        Ref: PollerAPI
+    Type: AWS::ApiGateway::Deployment
   
