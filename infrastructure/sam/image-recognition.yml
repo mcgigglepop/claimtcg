@@ -214,8 +214,6 @@ Resources:
             Fn::Sub: arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:ImageRecognitionREST
       FunctionName: SendMessageToClient
       Handler: sendMessageToClient.lambda_handler
-      Layers:
-      - Ref: LambdaLayer
       Role:
         Fn::GetAtt:
         - ImageRecognitionRole
