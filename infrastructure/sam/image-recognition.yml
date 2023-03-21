@@ -123,4 +123,22 @@ Resources:
       RestApiId:
         Ref: PollerAPI
     Type: AWS::ApiGateway::Deployment
+  CreateStateMachineAndToken:
+    Properties:
+      CodeUri: ../code/
+      Description: 'ImageRecognition: Lambda function to Create StateMachine And Token'
+      Environment:
+        Variables:
+          stepfunctions_arn:
+            Fn::Sub: arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:ImageRecognitionREST
+          worker_arn:
+            Fn::Sub: arn:aws:states:${AWS::Region}:${AWS::AccountId}:activity:OpenConnection
+      FunctionName: CreateStateMachineAndToken
+      Handler: createStateMachineAndToken.lambda_handler
+      Role:
+        Fn::GetAtt:
+        - MyLambdaRole
+        - Arn
+      Runtime: python3.7
+    Type: AWS::Serverless::Function
   
