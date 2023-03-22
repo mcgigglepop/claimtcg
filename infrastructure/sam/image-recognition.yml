@@ -227,3 +227,20 @@ Resources:
       ProtocolType: WEBSOCKET
       RouteSelectionExpression: $request.body.action
     Type: AWS::ApiGatewayV2::Api
+  WSConnectFunction:
+    Properties:
+      CodeUri:
+        Bucket: ../code/
+      Description: Function triggers OpenConnection is triggered by the websocket API
+      Environment:
+        Variables:
+          stepfunctions_arn:
+            Fn::Sub: arn:aws:states:${AWS::Region}:${AWS::AccountId}:execution:ImageRecognitionREST
+      FunctionName: ImageRecognition_OpenConnection
+      Handler: openConnection.lambda_handler
+      Role:
+        Fn::GetAtt:
+        - ImageRecognitionRole
+        - Arn
+      Runtime: python3.7
+    Type: AWS::Serverless::Function
