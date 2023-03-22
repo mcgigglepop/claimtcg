@@ -239,7 +239,7 @@ Resources:
       Description: 'ImageRecognition: Lambda function to run image recognition'
       Environment:
         Variables:
-          BUCKETBUCKET: !Ref ImagesBucket
+          BUCKET: !Ref ImagesBucket
       FunctionName: ImageRecognition-Rekognition
       Handler: runImageRecognition.lambda_handler
       Role:
@@ -367,8 +367,7 @@ Resources:
     Type: AWS::DynamoDB::Table
   WSConnectFunction:
     Properties:
-      CodeUri:
-        Bucket: ../code/
+      CodeUri: ../code/
       Description: Function triggers OpenConnection is triggered by the websocket API
       Environment:
         Variables:
@@ -384,8 +383,7 @@ Resources:
     Type: AWS::Serverless::Function
   ImageRecognitionGetActivityStatus:
     Properties:
-      CodeUri:
-        Bucket: ../code/
+      CodeUri: ../code/
       Description: 'ImageRecognition: Lambda function to GetActivityStatus or Results'
       FunctionName: ImageRecognition_GetActivityStatus
       Handler: getActivityStatus.lambda_handler
