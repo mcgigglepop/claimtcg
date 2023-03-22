@@ -429,3 +429,12 @@ Resources:
       - Ref: ImageRecognitionRole
     Type: AWS::IAM::Policy
   
+Outputs:
+  RestApiUrl:
+    Description: The REST API URL
+    Value:
+      Fn::Sub: https://${PollerAPI}.execute-api.${AWS::Region}.amazonaws.com/${ApiStage}
+  WebsocketApiUrl:
+    Description: The WebSocket API URL
+    Value:
+      Fn::Sub: wss://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/${ImageRecognitionStage}
