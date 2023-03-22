@@ -277,6 +277,20 @@ Resources:
       ProtocolType: WEBSOCKET
       RouteSelectionExpression: $request.body.action
     Type: AWS::ApiGatewayV2::Api
+  MyRoute:
+    DependsOn:
+    - LambdaIntegration
+    Properties:
+      ApiId:
+        Ref: MyApi
+      AuthorizationType: NONE
+      RouteKey: OpenConnection
+      Target:
+        Fn::Join:
+        - /
+        - - integrations
+          - Ref: LambdaIntegration
+    Type: AWS::ApiGatewayV2::Route
   LambdaIntegration:
     Properties:
       ApiId:
