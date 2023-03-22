@@ -244,3 +244,16 @@ Resources:
         - Arn
       Runtime: python3.7
     Type: AWS::Serverless::Function
+  ImageRecognitionGetActivityStatus:
+    Properties:
+      CodeUri:
+        Bucket: ../code/
+      Description: 'ImageRecognition: Lambda function to GetActivityStatus or Results'
+      FunctionName: ImageRecognition_GetActivityStatus
+      Handler: getActivityStatus.lambda_handler
+      Role:
+        Fn::GetAtt:
+        - MyLambdaRole
+        - Arn
+      Runtime: python3.7
+    Type: AWS::Serverless::Function
