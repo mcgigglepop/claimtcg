@@ -293,4 +293,11 @@ Resources:
         - Arn
       Runtime: python3.7
     Type: AWS::Serverless::Function
+  AllowAPIGWInvokeGetActivityStatus:
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: ImageRecognitionGetActivityStatus
+      Principal: apigateway.amazonaws.com
+    Type: AWS::Lambda::Permission
   
