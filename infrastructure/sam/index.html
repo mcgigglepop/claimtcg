@@ -1,0 +1,185 @@
+<!-- 
+MIT No Attribution
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this
+software and associated documentation files (the "Software"), to deal in the Software
+without restriction, including without limitation the rights to use, copy, modify,
+merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <title>
+        Poll To Push
+    </title>
+    <style>
+    .loadercontainer {
+        text-align: center;
+    }
+
+    .loader {
+        display: none;
+        width: 100px;
+        height: 100px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container col-md-4 col-md-offset-4">
+        <h1 class="text-center">#PollToPush Sample App </h1>
+        <input id="imageKey" type="text" class="form-control" placeholder="Image Key">
+        <br />
+        <input id="restUrl" type="text" class="form-control" placeholder="REST URL">
+        <br />
+        <input id="websocketUrl" type="text" class="form-control" placeholder="Websocket URL">
+        <br />
+        <button id="sendMessage" class="btn btn-success col-md-12" type="button">Send</button>
+        <br />
+        <hr />
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Result</h3>
+            </div>
+            <div class="panel-body" id="outputContents">
+                <div class="loadercontainer">
+                    <div class="loader" id="statusLoader"></div>
+                </div>
+            </div>
+            <div class="text-center" id="resultDiv">
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script>
+var wsUrl;
+var restUrl;
+var chatSocket;
+
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+
+$(window).on('load', function() {
+    var ws = getParameterByName('websocket');
+    if (ws != null) {
+        document.getElementById("websocketUrl").value = ws;
+    }
+    var rest = getParameterByName('rest');
+    if (rest != null) {
+        document.getElementById("restUrl").value = rest;
+    }
+})
+
+
+$("#sendMessage").on('click', function() {
+    $('#resultDiv').html("");
+    sendRestRequest();
+});
+
+$(document).keypress(function(e) {
+    if (e.which == 13) { sendMessage(); }
+});
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function sendRestRequest() {
+    var imageKey = $("#imageKey").val();
+    restUrl = $("#restUrl").val();
+    if (restUrl == "" || restUrl == null) {
+        alert("No REST URL supplied");
+        return;
+    }
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            var resp = this.responseText;
+            createWsConnection(resp);
+        }
+    };
+
+    xhttp.open("POST", restUrl + "/CreateStateMachineAndToken/?Key=" + imageKey, true);
+    xhttp.send();
+
+}
+
+function createWsConnection(data) {
+    showSpinner();
+    wsUrl = $("#websocketUrl").val();
+    if (wsUrl == "" || wsUrl == null) {
+        alert("No Websocket URL supplied");
+        return;
+    }
+    data = JSON.parse(data);
+    chatSocket = new WebSocket(wsUrl);
+    chatSocket.onopen = function(event) {
+        console.log("Websocket opened");
+        var jsonPayload = '{"action":"OpenConnection", "task_token":"' + data.task_token + '", "executionArn":"' + data.executionArn + '"}';
+        chatSocket.send(jsonPayload);
+    };
+    chatSocket.onmessage = function(msg) {
+        console.log(msg);
+        var regexp = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+        var isUrl = regexp.test(msg.data)
+        //if (isUrl == true) {
+            stopSpinner();
+            $('#resultDiv').html(msg.data);
+        //}
+    }
+}
+
+function showSpinner() {
+    document.getElementById("statusLoader").style.display = "inline-block";
+}
+
+function stopSpinner() {
+    document.getElementById("statusLoader").style.display = "none";
+
+}
+</script>
+
+</html>
