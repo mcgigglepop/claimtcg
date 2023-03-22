@@ -316,6 +316,14 @@ Resources:
         - - integrations
           - Ref: LambdaIntegration
     Type: AWS::ApiGatewayV2::Route
+  ImageRecognitionDeployment:
+    DependsOn:
+    - MyRoute
+    Properties:
+      ApiId:
+        Ref: MyApi
+      Description: My deployment
+    Type: AWS::ApiGatewayV2::Deployment
   LambdaIntegration:
     Properties:
       ApiId:
