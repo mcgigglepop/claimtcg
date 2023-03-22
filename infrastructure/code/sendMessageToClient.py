@@ -25,7 +25,7 @@ def lambda_handler(event, context):
 
     currentExecutionArn = event['myArn']
     
-    ddbGet = ddbClient.get_item(TableName='PollToPush-ExecutionMapper', Key={'ExecutionArn':{'S': currentExecutionArn}})
+    ddbGet = ddbClient.get_item(TableName='ImageRecognition-ExecutionMapper', Key={'ExecutionArn':{'S': currentExecutionArn}})
 
     if 'Item' in ddbGet:
         clientForCurrentExecution = ddbGet['Item']['WsClientId']['S']

@@ -20,7 +20,7 @@ def lambda_handler(event, context):
             'S': event['requestContext']['connectionId'],
         },
     },
-    TableName='PollToPush-ExecutionMapper',
+    TableName='ImageRecognition-ExecutionMapper',
 )
                     
     return {
