@@ -324,6 +324,14 @@ Resources:
         Ref: MyApi
       Description: My deployment
     Type: AWS::ApiGatewayV2::Deployment
+  ImageRecognitionStage:
+    Properties:
+      ApiId:
+        Ref: MyApi
+      DeploymentId:
+        Ref: ImageRecognitionDeployment
+      StageName: prod
+    Type: AWS::ApiGatewayV2::Stage
   LambdaIntegration:
     Properties:
       ApiId:
