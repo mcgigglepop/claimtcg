@@ -130,6 +130,13 @@ Resources:
         Ref: ImageRecognitionGetActivityStatus
       Principal: apigateway.amazonaws.com
     Type: AWS::Lambda::Permission
+  LambdaMainInvokePermission:
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: CreateStateMachineAndToken
+      Principal: apigateway.amazonaws.com
+    Type: AWS::Lambda::Permission
   CreateStateMachineAndToken:
     Properties:
       CodeUri: ../code/
