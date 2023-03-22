@@ -4,7 +4,7 @@ Code repository for trading card platform
 ## Image Recognition Pipeline
 To implement the frontend architecture, use a JavaScript framework, such as JQuery, to build the web application. Use API Gateway to accept REST API requests for the data, and establish a WebSocket connection on the client side to return the image recognition query results. This approach can be used for any scenario where long-running queries are needed to provide responses to users.
   
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![alt text](https://github.com/mcgigglepop/claimtcg/blob/main/images/image-recognition-pipeline.png?raw=true)
   
 1. The Client generates an imageID UUID and uplaods the image to s3
 2. The client sends a REST request to API Gateway with image UUID. This invokes a Lambda function that starts the Step Functions state machine execution. The function then returns the execution ID to the client.
