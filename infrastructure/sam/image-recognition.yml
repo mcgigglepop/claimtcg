@@ -267,6 +267,16 @@ Resources:
       - arn:aws:iam::aws:policy/AmazonAthenaFullAccess
       RoleName: ImageRecognitionRole
     Type: AWS::IAM::Role
+  ImageRecognitionPolicy:
+    Properties:
+      PolicyDocument:
+        Fn::Sub: |-
+          { "Version": "2012-10-17", "Statement": [ { "Sid": "StepFunctionsPermissions", "Effect": "Allow", "Action": [ "states:StartExecution", "states:GetActivityTask", "states:SendTaskSuccess" ], "Resource": [ "${RecognitionStateMachine}:*:*", "${OpenConnectionActivity}" ] },{ "Sid": "StepFunctionsDescribeExecution", "Effect": "Allow", "Action": [ "states:DescribeExecution" ], "Resource":["arn:aws:states:${AWS::Region}:${AWS::AccountId}:execution:*:*"]
+          }, { "Sid": "AllowS3ObjectInteractions", "Effect": "Allow", "Action": [ "s3:PutObject", "s3:PutObjectAcl", "s3:GetObjectAcl", "s3:GetObject", "s3:DeleteObject" ], "Resource": [ "arn:aws:s3:::${ImageRecognitionBucket}", "arn:aws:s3:::${ImageRecognitionBucket}/*", "arn:aws:s3:::${WebsiteBucket}", "arn:aws:s3:::${WebsiteBucket}/*", "arn:aws:s3:::aws-vpa-tweets/*" ] }, { "Sid": "AllowS3Interactions", "Effect": "Allow", "Action": [ "s3:ListBucket", "s3:ListAllMyBuckets", "s3:GetBucketLocation" ], "Resource": ["arn:aws:s3:::*"] }, { "Sid": "AllowDynamo", "Effect": "Allow", "Action": [ "dynamodb:PutItem", "dynamodb:GetItem" ], "Resource": ["arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${DynamoMapper}"] } ] }
+      PolicyName: ImageRecognitionPolicy
+      Roles:
+      - Ref: ImageRecognitionRole
+    Type: AWS::IAM::Policy
   UpdateClientFunction:
     Properties:
       CodeUri: ../code/
