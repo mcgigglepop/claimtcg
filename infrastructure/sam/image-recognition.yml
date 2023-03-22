@@ -270,6 +270,22 @@ Resources:
       ProtocolType: WEBSOCKET
       RouteSelectionExpression: $request.body.action
     Type: AWS::ApiGatewayV2::Api
+  LambdaIntegration:
+    Properties:
+      ApiId:
+        Ref: MyApi
+      IntegrationType: AWS_PROXY
+      IntegrationUri:
+        Fn::Join:
+        - ''
+        - - 'arn:aws:apigateway:'
+          - Ref: AWS::Region
+          - :lambda:path/2015-03-31/functions/
+          - Fn::GetAtt:
+            - WSConnectFunction
+            - Arn
+          - /invocations
+    Type: AWS::ApiGatewayV2::Integration
   AllowAPIGWInvokeLambda:
     Properties:
       Action: lambda:InvokeFunction
