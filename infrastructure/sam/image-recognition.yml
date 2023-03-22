@@ -193,6 +193,10 @@ Resources:
         - Arn
       StateMachineName: ImageRecognitionREST
     Type: AWS::StepFunctions::StateMachine
+  OpenConnectionActivity:
+    Properties:
+      Name: OpenConnection
+    Type: AWS::StepFunctions::Activity
   StatesExecutionRole:
     Properties:
       AssumeRolePolicyDocument:
