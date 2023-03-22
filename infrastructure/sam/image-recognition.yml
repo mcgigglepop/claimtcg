@@ -277,6 +277,19 @@ Resources:
         Ref: WSConnectFunction
       Principal: apigateway.amazonaws.com
     Type: AWS::Lambda::Permission
+  DynamoMapper:
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: ExecutionArn
+        AttributeType: S
+      KeySchema:
+      - AttributeName: ExecutionArn
+        KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: '5'
+        WriteCapacityUnits: '5'
+      TableName: ImageRecognition-ExecutionMapper
+    Type: AWS::DynamoDB::Table
   WSConnectFunction:
     Properties:
       CodeUri:
