@@ -263,6 +263,13 @@ Resources:
       ProtocolType: WEBSOCKET
       RouteSelectionExpression: $request.body.action
     Type: AWS::ApiGatewayV2::Api
+  AllowAPIGWInvokeLambda:
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: WSConnectFunction
+      Principal: apigateway.amazonaws.com
+    Type: AWS::Lambda::Permission
   WSConnectFunction:
     Properties:
       CodeUri:
