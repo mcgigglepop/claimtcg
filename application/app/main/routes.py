@@ -1,5 +1,6 @@
+import boto3
 from app.main import bp
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, current_app
 from flask_login import login_required, current_user
 from sqlalchemy import func, select, text
 import json
@@ -7,6 +8,12 @@ from app import db
 from app.models import Collection, Tag, Item
 
 from sqlalchemy.orm import aliased
+
+import imghdr
+import six
+import base64
+import uuid
+import io
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
@@ -54,11 +61,62 @@ def uploadimage():
     """
     Route and method for uploading image to s3.
     """
+    base64EncodedString  = request.form.get('originalImageholder')    
+    # AWS bucket name
     
-    originalImageholder  = request.form.get('originalImageholder')
-    print(originalImageholder)
-    # return the decoded plaintext value
-    return "success"
+    bucket_name = 'image-recognition-pipeline-imagesbucket-280ljko15us4'
+
+    # file and file name
+    file, file_name = decode_base64_file(base64EncodedString)
+
+    # set the boto3 client with IAM profile
+    client = boto3.client('s3', aws_access_key_id='',
+                          aws_secret_access_key='')
+
+    # upload the object to S3
+    client.upload_fileobj(
+        file,
+        bucket_name,
+        file_name,
+        ExtraArgs={'ACL': 'public-read'}
+    )
+
+    # return the file URL
+    return f"{file_name}"
+
+
+# decode base64 file
+def decode_base64_file(data):
+    if isinstance(data, six.string_types):
+        # Check if the base64 string is in the "data:" format
+        if 'data:' in data and ';base64,' in data:
+            # Break out the header from the base64 content
+            header, data = data.split(';base64,')
+
+        # Try to decode the file. Return validation error if it fails.
+        try:
+            decoded_file = base64.b64decode(data)
+        except TypeError:
+            TypeError('invalid_image')
+
+        # Generate file name:
+        file_name = str(uuid.uuid4())[:12]  # 12 characters are more than enough.
+
+        # Get the file name extension:
+        file_extension = get_file_extension(file_name, decoded_file)
+
+        # complete the file name
+        complete_file_name = "%s.%s" % (file_name, file_extension,)
+
+        # return the decoded file and complete file name
+        return io.BytesIO(decoded_file), complete_file_name
+
+# get file extension
+def get_file_extension(file_name, decoded_file):
+    # get file extension
+    extension = imghdr.what(file_name, decoded_file)
+    extension = "jpg" if extension == "jpeg" else extension
+    return extension
 
 @bp.route('/collections', methods=['GET', 'POST'])
 @login_required
