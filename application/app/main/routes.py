@@ -48,6 +48,18 @@ def addItem():
     userCollections = db.session.query(Collection).filter(Collection.user_id==current_user.id).all()
     return render_template('internal/add-item.html', collections=userCollections, title='Add Item')
 
+@bp.route('/uploadimage', methods=['POST'])
+@login_required
+def uploadimage():
+    """
+    Route and method for uploading image to s3.
+    """
+    
+    originalImageholder  = request.form.get('originalImageholder')
+    print(originalImageholder)
+    # return the decoded plaintext value
+    return "success"
+
 @bp.route('/collections', methods=['GET', 'POST'])
 @login_required
 def collections():
