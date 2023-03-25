@@ -39,3 +39,4 @@ app.db
 **/migrations/*
 **/logs/*
 **/packages/**
+layers.zip
