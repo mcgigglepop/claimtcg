@@ -174,3 +174,13 @@ def createCollection():
         db.session.commit()
 
         return redirect(url_for('main.collections'))
+    
+@bp.route('/create-options', methods=['GET', 'POST'])
+@login_required
+def createOptions():
+    """
+    Route and method for rendering the create collection options page.
+    """
+
+    return render_template('internal/create-options.html', title='Create Collection')
+    
