@@ -2,6 +2,23 @@
 
 {% block content %}
 <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl footer-offset">
+    <style>
+        .opt-create img {
+            position: relative;
+            width: 100px;
+        }
+        .opt-create {
+            display: inline-block;
+            text-align: center;
+            border: solid 2px rgba(0, 0, 0, .1);
+            padding: 40px;
+            min-width: 44%;
+            margin: 2%;
+            border-radius: 15px;
+            -moz-border-radius: 15px;
+            -webkit-border-radius: 15px;
+        }
+    </style>
     <script src="{{ url_for('static', filename='internal/js/hs.theme-appearance.js') }}"></script>
     {% include 'internal/_header.html' %}
     {% include 'internal/_sidebar.html' %}
@@ -75,7 +92,17 @@
                   <div class="card-body">
 
 
-                    CONTENT HERE
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <p>Choose "Custom" if you want your collection to be one of a kind. Custom collections are empty and you can add whatever items you like to the collection. Choose "Set List" if you want a pre-filled collection of items to check off as you build a collection. This is useful if you're trying to complete a master set of a specific item.</p>
+                        <a href="04_retro-create-single.html" class="opt-create">
+                            <img src="{{ url_for('static', filename='customer_facing/images/misc/retro-coll-single.png') }}" alt="">
+                            <h3 class="mt-2">Custom</h3>
+                        </a>
+                        <a href="04_retro-create-multiple.html" class="opt-create">
+                            <img src="{{ url_for('static', filename='customer_facing/images/misc/retro-coll-multiple.png') }}" alt="">
+                            <h3 class="mt-2">Set List</h3>
+                        </a>
+                    </div>     
 
                   </div>
                   <!-- Body -->
