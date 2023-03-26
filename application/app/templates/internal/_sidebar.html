@@ -76,10 +76,10 @@
                   {% else %}
                     <a class="nav-link" href="{{ url_for('main.collections') }}">My Collections</a>
                   {% endif %}
-                  {% if 'create-collection' in request.path %}
-                    <a class="nav-link active" href="{{ url_for('main.createCollection') }}">Create Collection</a>
+                  {% if 'create-setlist' in request.path %}
+                    <a class="nav-link active" href="{{ url_for('main.createOptions') }}">Create Collection</a>
                   {% else %}
-                    <a class="nav-link" href="{{ url_for('main.createCollection') }}">Create Collection</a>
+                    <a class="nav-link" href="{{ url_for('main.createOptions') }}">Create Collection</a>
                   {% endif %}
                 </div>
               </div>
