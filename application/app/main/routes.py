@@ -184,3 +184,36 @@ def createOptions():
 
     return render_template('internal/create-options.html', title='Create Collection')
     
+@bp.route('/create-custom', methods=['GET', 'POST'])
+@login_required
+def createCustom():
+    """
+    Route and method for rendering the create custom collections page.
+    """
+
+    if request.method=='GET':
+        return render_template('internal/create-custom.html', title='Create Collection')
+    else:
+        collectionName = request.form.get('collectionName')
+        visibilityType = request.form.get('visibilityType')
+        collectionType = 'Custom Collection'
+
+        collection = Collection(collectionName=collectionName, visibilityType=visibilityType, collectionType=collectionType, author=current_user)
+        
+        db.session.add(collection)
+        db.session.flush()
+        tagObjects = []
+
+
+        if request.form.get('tag'): tagObjects.append(Tag(tagName=request.form.get('tag'), collectionId=collection.id))
+        if request.form.get('tagLine_0'): tagObjects.append(Tag(tagName=request.form.get('tagLine_0'), collectionId=collection.id))
+        if request.form.get('tagLine_1'): tagObjects.append(Tag(tagName=request.form.get('tagLine_1'), collectionId=collection.id))
+        if request.form.get('tagLine_2'): tagObjects.append(Tag(tagName=request.form.get('tagLine_2'), collectionId=collection.id))
+        if request.form.get('tagLine_3'): tagObjects.append(Tag(tagName=request.form.get('tagLine_3'), collectionId=collection.id))
+        if request.form.get('tagLine_4'): tagObjects.append(Tag(tagName=request.form.get('tagLine_4'), collectionId=collection.id))
+
+        db.session.bulk_save_objects(tagObjects)
+        db.session.commit()
+
+        return redirect(url_for('main.collections'))
+    
