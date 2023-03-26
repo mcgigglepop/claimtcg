@@ -81,23 +81,23 @@
               <div class="card-body">
                 <!-- Form -->
                 <div class="mb-4">
-                  <label for="productNameLabel" class="form-label">Item Name</label>
+                  <label for="itemNameLabel" class="form-label">Item Name</label>
   
-                  <input type="text" class="form-control" name="productName" id="productNameLabel" placeholder="Shirt, t-shirts, etc." aria-label="Shirt, t-shirts, etc." value="Tiro track jacket">
+                  <input type="text" class="form-control" name="itemName" id="itemNameLabel" placeholder="Charizard - Holo" aria-label="Charizard - Holo">
                 </div>
                 <!-- End Form -->
                 <div class="mb-4">
-                  <label for="productNameLabel" class="form-label">Description</label>
+                  <label for="itemDescriptionLabel" class="form-label">Description</label>
   
-                  <textarea id="exampleFormControlTextarea1" class="form-control" placeholder="Textarea field" rows="4"></textarea>
+                  <textarea id="itemDescriptionTextarea" class="form-control" name="itemDescription" placeholder="Item description..." rows="4"></textarea>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                     <!-- Form -->
                     <div class="mb-4">
-                      <label for="SKULabel" class="form-label">Set List</label>
+                      <label for="setListLabel" class="form-label">Set List</label>
   
-                      <input type="text" class="form-control" name="SKU" id="SKULabel" placeholder="eg. 348121032" aria-label="eg. 348121032">
+                      <input type="text" class="form-control" name="setList" id="setListLabel" placeholder="1999 POKEMON GAME" aria-label="1999 POKEMON GAME">
                     </div>
                     <!-- End Form -->
                   </div>
@@ -106,10 +106,10 @@
                   <div class="col-sm-6">
                     <!-- Form -->
                     <div class="mb-4">
-                      <label for="weightLabel" class="form-label">Graded</label>
+                      <label for="gradedLabel" class="form-label">Graded</label>
   
                       <div class="input-group">
-                        <input type="text" class="form-control" name="weightName" id="weightLabel" placeholder="0.0" aria-label="0.0">
+                        <input type="text" class="form-control" name="graded" id="gradedLabel" placeholder="PSA GEM MINT 10" aria-label="PSA GEM MINT 10">
   
                         
                       </div>
@@ -173,12 +173,12 @@
                     }'>
                   <div class="row mb-4">
                     <div class="col-sm-4 mb-2 mb-sm-0">
-                      <input type="text" class="form-control" placeholder="Enter tags" aria-label="Enter tags">
+                      <input type="text" class="form-control" placeholder="Enter tag name" aria-label="Enter tag name">
                     </div>
                     <!-- End Col -->
   
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" placeholder="Enter tags" aria-label="Enter tags">
+                      <input type="text" class="form-control" placeholder="Enter tag value" aria-label="Enter tag value">
                     </div>
                     <!-- End Col -->
                   </div>
@@ -196,12 +196,12 @@
                 <div id="addAnotherOptionFieldTemplate" style="display: none;">
                   <div class="row mb-4">
                     <div class="col-sm-4 mb-2 mb-sm-0">
-                      <input type="text" class="form-control" placeholder="Enter tags" aria-label="Enter tags">
+                      <input type="text" class="form-control" placeholder="Enter tag name" aria-label="Enter tag name">
                     </div>
                     <!-- End Col -->
   
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" placeholder="Enter tags" aria-label="Enter tags">
+                      <input type="text" class="form-control" placeholder="Enter tag value" aria-label="Enter tag value">
                     </div>
                     <!-- End Col -->
                   </div>
@@ -444,22 +444,22 @@
               <div class="card-body">
                 <!-- Form -->
                 <div class="mb-4">
-                  <label for="vendorLabel" class="form-label">Purchase Price</label>
+                  <label for="purchasePriceLabel" class="form-label">Purchase Price</label>
   
-                  <input type="text" class="form-control" name="vendor" id="vendorLabel" placeholder="eg. Nike" aria-label="eg. Nike">
+                  <input type="text" class="form-control" name="purchasePrice" id="purchasePriceLabel" placeholder="0.00" aria-label="0.00">
                 </div>
                 <!-- End Form -->
                 
                 <!-- Form -->
                 <div class="mb-4">
-                  <label for="collectionsLabel" class="form-label">Acquired From/Provenance</label>
+                  <label for="provenanceLabel" class="form-label">Acquired From/Provenance</label>
   
                   <!-- Select -->
                   <div class="tom-select-custom">
-                    <select class="js-select form-select" autocomplete="off" id="collectionsLabel" data-hs-tom-select-options='{
+                    <select class="js-select form-select" autocomplete="off" id="provenanceLabel" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                               "hideSearch": true,
-                              "placeholder": "Select collections"
+                              "placeholder": "Select provenance"
                             }'>
                       <option value="Public Auction">Public Auction</option>0
                       <option value="Private Transaction">Private Transaction</option>
