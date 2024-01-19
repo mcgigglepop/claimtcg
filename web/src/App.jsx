@@ -1,6 +1,6 @@
-import Header from './components/Header/Header.jsx';
-import Hero from './components/Hero/Hero.jsx';
-import TrendingProducts from './components/TrendingProducts/TrendingProducts.jsx';
+import Header from './components/Header/Header.jsx'
+import Hero from './components/Hero/Hero.jsx'
+import TrendingProducts from './components/TrendingProducts/TrendingProducts.jsx'
 
 function App() {
   return (
@@ -8,11 +8,11 @@ function App() {
       <Header />
       <div class="no-bottom no-top" id="content">
         <div id="top"></div>
-          <Hero />
-          <TrendingProducts />
+        <Hero />
+        <TrendingProducts />
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
