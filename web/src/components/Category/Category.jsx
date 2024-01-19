@@ -11,7 +11,7 @@ export default function Category() {
             data-wow-delay=".1s"
           >
             <a
-              href="{{ url_for('main.index') }}"
+              href="#"
               className="icon-box style-2 rounded"
             >
               <i className="fa fa-card"></i>
@@ -23,7 +23,7 @@ export default function Category() {
             data-wow-delay=".2s"
           >
             <a
-              href="{{ url_for('main.index') }}"
+              href="#"
               className="icon-box style-2 rounded"
             >
               <i className="fa fa-card"></i>
@@ -35,7 +35,7 @@ export default function Category() {
             data-wow-delay=".3s"
           >
             <a
-              href="{{ url_for('main.index') }}"
+              href="#"
               className="icon-box style-2 rounded"
             >
               <i className="fa fa-card"></i>
@@ -47,7 +47,7 @@ export default function Category() {
             data-wow-delay=".4s"
           >
             <a
-              href="{{ url_for('main.index') }}"
+              href="#"
               className="icon-box style-2 rounded"
             >
               <i className="fa fa-card"></i>
@@ -59,7 +59,7 @@ export default function Category() {
             data-wow-delay=".5s"
           >
             <a
-              href="{{ url_for('main.index') }}"
+              href="#"
               className="icon-box style-2 rounded"
             >
               <i className="fa fa-card"></i>
@@ -71,7 +71,7 @@ export default function Category() {
             data-wow-delay=".6s"
           >
             <a
-              href="{{ url_for('main.index') }}"
+              href="#"
               className="icon-box style-2 rounded"
             >
               <i className="fa fa-card"></i>

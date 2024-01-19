@@ -43,7 +43,7 @@ export default function Footer() {
                   <h5>Explore</h5>
                   <ul>
                     <li>
-                      <a href="{{ url_for('main.index') }}">Marketplace</a>
+                      <a href="#">Marketplace</a>
                     </li>
                   </ul>
                 </div>
@@ -101,9 +101,9 @@ export default function Footer() {
         <div className="container">
           <div className="row">
             <div className="col-md-12 text-center">
-              <a href="{{ url_for('main.index') }}">
+              <a href="#">
                 <span className="copy">
-                  &copy; Copyright 2022 - Gigaland by Designesia
+                  &copy; Copyright 2022 - design by Designesia
                 </span>
               </a>
             </div>

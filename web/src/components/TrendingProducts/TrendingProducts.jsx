@@ -21,7 +21,7 @@ export default function TrendingProducts() {
                 data-wow-delay="1s"
               >
                 <div className="nft_pic mod-b">
-                  <a href="{{ url_for('main.index') }}">
+                  <a href="#">
                     <span className="nft_pic_info">
                       <span className="nft_pic_title">
                         First Edition Charizard
@@ -36,7 +36,7 @@ export default function TrendingProducts() {
                 </div>
 
                 <div className="nft_pic mod-b">
-                  <a href="{{ url_for('main.index') }}">
+                  <a href="#">
                     <span className="nft_pic_info">
                       <span className="nft_pic_title">
                         Blue-Eyes White Dragon
@@ -51,7 +51,7 @@ export default function TrendingProducts() {
                 </div>
 
                 <div className="nft_pic mod-b">
-                  <a href="{{ url_for('main.index') }}">
+                  <a href="#">
                     <span className="nft_pic_info">
                       <span className="nft_pic_title">Pikachu Illustrator</span>
                       <span className="nft_pic_by">PSA 9</span>
@@ -64,7 +64,7 @@ export default function TrendingProducts() {
                 </div>
 
                 <div className="nft_pic mod-b">
-                  <a href="{{ url_for('main.index') }}">
+                  <a href="#">
                     <span className="nft_pic_info">
                       <span className="nft_pic_title">
                         Legend of Blue-Eyes White Dragon
@@ -81,7 +81,7 @@ export default function TrendingProducts() {
                 </div>
 
                 <div className="nft_pic mod-b">
-                  <a href="{{ url_for('main.index') }}">
+                  <a href="#">
                     <span className="nft_pic_info">
                       <span className="nft_pic_title">
                         Family Event Trophy Kangaskhan
@@ -96,7 +96,7 @@ export default function TrendingProducts() {
                 </div>
 
                 <div className="nft_pic mod-b">
-                  <a href="{{ url_for('main.index') }}">
+                  <a href="#">
                     <span className="nft_pic_info">
                       <span className="nft_pic_title">Pokemon Base Set</span>
                       <span className="nft_pic_by">

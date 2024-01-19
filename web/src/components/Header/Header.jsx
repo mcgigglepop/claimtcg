@@ -11,7 +11,7 @@ export default function Header() {
               <div className="de-flex-col">
                 <div className="de-flex-col">
                   <div id="logo">
-                    <a href="{{ url_for('main.index') }}">
+                    <a href="#">
                       <img alt="" className="logo" src={logoSevenLight} />
                       <img alt="" className="logo-2" src={logoSeven} />
                     </a>
@@ -21,39 +21,39 @@ export default function Header() {
               <div className="de-flex-col header-col-mid">
                 <ul id="mainmenu">
                   <li>
-                    <a href="{{ url_for('main.index') }}">
+                    <a href="#">
                       Explore<span></span>
                     </a>
                   </li>
                   <li>
-                    <a href="{{ url_for('main.index') }}">
+                    <a href="#">
                       About Us<span></span>
                     </a>
                   </li>
                   <li>
-                    <a href="{{ url_for('main.index') }}">
+                    <a href="#">
                       FAQ<span></span>
                     </a>
                   </li>
                   <li>
-                    <a href="{{ url_for('auth.login') }}">
+                    <a href="#">
                       Login<span></span>
                     </a>
                   </li>
                   <li>
-                    <a href="{{ url_for('auth.register') }}">
+                    <a href="#">
                       Register<span></span>
                     </a>
                   </li>
                   <li className="d-block d-md-none">
-                    <a href="{{ url_for('auth.register') }}">
+                    <a href="#">
                       Sell With Us<span></span>
                     </a>
                   </li>
                 </ul>
                 <div className="menu_side_area">
                   <a
-                    href="{{ url_for('auth.register') }}"
+                    href="#"
                     className="btn-main btn-wallet"
                   >
                     <i className="icon_wallet_alt"></i>

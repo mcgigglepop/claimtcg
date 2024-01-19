@@ -10,7 +10,7 @@ function App() {
   return (
     <div id="wrapper">
       <Header />
-      <div class="no-bottom no-top" id="content">
+      <div className="no-bottom no-top" id="content">
         <div id="top"></div>
         <Hero />
         <TrendingProducts />
