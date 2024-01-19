@@ -2545,6 +2545,21 @@ footer:not(.footer-light) #form_subscribe.form-dark input[type=text] {
     -webkit-border-radius: 0 5px 5px 0;
 }
 
+#form_subscribe #btn-subscribe-top i {
+    text-align: center;
+    font-size: 28px;
+    float: left;
+    width: 20%;
+    background: #171A21;
+    color: #ffffff;
+    display: table-cell;
+    padding: 5px 0 11px 0;
+    border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    background: linear-gradient(to right, var(--secondary-color) 0%, var(--secondary-color-2) 100%);
+}
+
 #form_quick_search {
     font-family: var(--body-font);
     display: inline-block;
