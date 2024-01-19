@@ -1,5 +1,6 @@
 import Header from './components/Header/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
+import TrendingProducts from './components/TrendingProducts/TrendingProducts.jsx';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <div class="no-bottom no-top" id="content">
         <div id="top"></div>
           <Hero />
+          <TrendingProducts />
       </div>
     </div>
   );
