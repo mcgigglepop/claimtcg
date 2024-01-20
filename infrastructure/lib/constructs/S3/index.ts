@@ -64,12 +64,17 @@ export class S3 extends Construct {
       },
     );
 
+    const frontEndSubDomain =
+      process.env.NODE_ENV === 'Production'
+        ? `${config.domain_name}`
+        : `${config.frontEndSubDomain}.${config.domain_name}`; 
+      
     this.distribution = new Distribution(
       scope,
       `Frontend-Distribution-${process.env.NODE_ENV || ''}`,
       {
         certificate: props.acm.certificate,
-        domainNames: [`${config.domain_name}`],
+        domainNames: [`${frontEndSubDomain}`],
         defaultRootObject: 'index.html',
         defaultBehavior: {
           origin: new S3Origin(this.web_bucket),
@@ -81,7 +86,7 @@ export class S3 extends Construct {
     new ARecord(scope, `FrontendAliasRecord-${process.env.NODE_ENV || ''}`, {
       zone: props.route53.hosted_zone,
       target: RecordTarget.fromAlias(new CloudFrontTarget(this.distribution)),
-      recordName: `${config.domain_name}`,
+      recordName: `${frontEndSubDomain}`,
     });
 
     new CfnOutput(scope, `FrontendURL-${process.env.NODE_ENV || ''}`, {
