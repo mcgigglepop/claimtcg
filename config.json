@@ -1,0 +1,5 @@
+{
+  "domain_name": "claimtcg.com",
+  "backend_dev_subdomain": "dev-backend",
+  "frontend_dev_subdomain": "dev-frontend"
+}
