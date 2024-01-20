@@ -18,8 +18,7 @@ export const Todo: React.FC<Props> = ({ todo }) => {
 
     <TodoBox>
       <TodoContent>
-        <h1>{todo.todo_name}</h1>
-        <p>{todo.todo_description}</p>
+        <h1>{todo.todo_email}</h1>
       </TodoContent>
 
         <TodoActions>

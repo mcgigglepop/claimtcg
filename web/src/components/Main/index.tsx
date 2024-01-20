@@ -43,8 +43,6 @@ export const Main: React.FC = () => {
     setTodos(current_todos => [...current_todos, response.data.todo]);
   };
 
-  const to_complete = todos.filter(todo => !todo.todo_completed).length;
-  const completed = todos.filter(todo => todo.todo_completed).length;
 
   return (
     <MainContainer>
@@ -53,7 +51,7 @@ export const Main: React.FC = () => {
 
       <CreateTodo handleTodoSubmit={handleTodoSubmit} />
 
-      <p>{completed}/{to_complete} completed</p>
+      <p>x/x completed</p>
 
 
       {todos.map(t => (
