@@ -67,7 +67,7 @@ export class S3 extends Construct {
     const frontEndSubDomain =
       process.env.NODE_ENV === 'Production'
         ? `${config.domain_name}`
-        : `${config.frontEndSubDomain}.${config.domain_name}`; 
+        : `${config.frontend_dev_subdomain}.${config.domain_name}`; 
       
     this.distribution = new Distribution(
       scope,

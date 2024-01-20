@@ -2,6 +2,5 @@
   "domain_name": "claimtcg.com",
   "backend_subdomain": "backend",
   "backend_dev_subdomain": "dev-backend",
-  "frontEndSubDomain": "",
   "frontend_dev_subdomain": "dev-frontend"
 }
