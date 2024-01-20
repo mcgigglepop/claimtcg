@@ -103,7 +103,7 @@ export default function Footer() {
             <div className="col-md-12 text-center">
               <a href="#">
                 <span className="copy">
-                  &copy; Copyright 2022 - design by Designesia
+                  &copy; Copyright 2024 - design by Designesia
                 </span>
               </a>
             </div>
