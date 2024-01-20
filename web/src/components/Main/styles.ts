@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const MainContainer = styled.header`
   display: flex;
@@ -22,8 +22,7 @@ const MainContainer = styled.header`
     line-height: 28px;
 
     margin-bottom: 24px;
-
   }
-`;
+`
 
-export { MainContainer };
+export { MainContainer }

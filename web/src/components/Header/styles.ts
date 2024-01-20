@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -11,8 +11,18 @@ const HeaderContainer = styled.header`
 
   a {
     color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      Segoe UI,
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      Fira Sans,
+      Droid Sans,
+      Helvetica Neue,
+      sans-serif;
     letter-spacing: 3px;
     font-size: 20px;
     font-weight: 300;
@@ -31,6 +41,6 @@ const HeaderContainer = styled.header`
 
     width: 240px;
   }
-`;
+`
 
-export { HeaderContainer };
+export { HeaderContainer }

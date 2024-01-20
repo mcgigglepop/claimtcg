@@ -1,12 +1,12 @@
 /* ---------- External ---------- */
-import 'styled-components';
+import 'styled-components'
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    name: string;
+    name: string
     colors: {
       primary: {
-        main: string;
+        main: string
       }
     }
   }

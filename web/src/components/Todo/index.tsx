@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import { Interfaces } from '../../../@types/interfaces';
+import { Interfaces } from '../../../@types/interfaces'
 
-import {TodoActions, TodoBox, TodoContainer, TodoContent} from './styles'
+import { TodoActions, TodoBox, TodoContainer, TodoContent } from './styles'
 
 interface Props {
   todo: Interfaces.Todo
@@ -10,24 +10,19 @@ interface Props {
 
 export const Todo: React.FC<Props> = ({ todo }) => {
   return (
+    <TodoContainer>
+      <input type="checkbox" name="" id="" />
 
-
-  <TodoContainer>
-
-    <input type="checkbox" name="" id="" />
-
-    <TodoBox>
-      <TodoContent>
-        <h1>{todo.todo_email}</h1>
-      </TodoContent>
+      <TodoBox>
+        <TodoContent>
+          <h1>{todo.todo_email}</h1>
+        </TodoContent>
 
         <TodoActions>
-        <button type="button">Edit</button>
-        <button type="button">Delete</button>
-      </TodoActions>
-    </TodoBox>
-
-
-  </TodoContainer>
+          <button type="button">Edit</button>
+          <button type="button">Delete</button>
+        </TodoActions>
+      </TodoBox>
+    </TodoContainer>
   )
-};
+}

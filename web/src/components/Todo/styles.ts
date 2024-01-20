@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const TodoContainer = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ const TodoContainer = styled.div`
 
   width: 100%;
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     margin-top: 10px;
     margin-right: 12px;
 
@@ -15,10 +15,8 @@ const TodoContainer = styled.div`
 
     width: 25px;
     height: 25px;
-
-    
   }
-`;
+`
 
 const TodoBox = styled.div`
   display: flex;
@@ -27,7 +25,7 @@ const TodoBox = styled.div`
 
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  
+
   flex: 1;
 
   h1 {
@@ -39,15 +37,15 @@ const TodoBox = styled.div`
     font-size: 22px;
     line-height: 26px;
   }
-`;
+`
 
 const TodoContent = styled.div`
   display: flex;
   flex-direction: column;
 
   flex: 1;
-`;
+`
 
-const TodoActions = styled.div``;
+const TodoActions = styled.div``
 
-export { TodoContainer, TodoBox, TodoContent, TodoActions };
+export { TodoContainer, TodoBox, TodoContent, TodoActions }
