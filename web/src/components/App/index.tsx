@@ -11,7 +11,7 @@ export const App: React.FC = () => {
     <AppContainer>
       <Header />
 
-      <MainSection>
+        <MainSection>
         <Sidebar />
 
         <Main />
