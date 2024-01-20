@@ -122,7 +122,7 @@ export class PipelineStack extends Construct {
               'on-failure': 'ABORT',
               commands: [
                 'cd web',
-                'npm install',
+                'yarn install',
                 `
                 echo '{
                   "domain_name": "${domainName}",
@@ -178,7 +178,7 @@ export class PipelineStack extends Construct {
             },
             pre_build: {
               'on-failure': 'ABORT',
-              commands: ['cd web/', 'npm install'],
+              commands: ['cd web/', 'yarn install'],
             },
             build: {
               'on-failure': 'ABORT',
