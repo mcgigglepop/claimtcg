@@ -252,20 +252,16 @@ const createApp = () =&gt; {
 &nbsp;
   app.post('/', <span class="fstat-no" title="function not covered" >async </span>(req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    try {</span>
-      const { todo_name, todo_description, todo_completed } = <span class="cstat-no" title="statement not covered" >req.body.todo;</span>
+      const { todo_email } = <span class="cstat-no" title="statement not covered" >req.body.todo;</span>
 &nbsp;
       const sql = <span class="cstat-no" title="statement not covered" >`</span>
     INSERT INTO Todolist
       (
-        \`todo_name\`,
-        \`todo_description\`,
-        \`todo_completed\`
+        \`todo_email\`
       )
       VALUES
         (
-          '${todo_name}',
-          '${todo_description}',
-          ${todo_completed}
+          '${todo_email}'
         );
   `;
 &nbsp;
@@ -276,10 +272,8 @@ const createApp = () =&gt; {
 <span class="cstat-no" title="statement not covered" >      <span class="missing-if-branch" title="if path not taken" >I</span>if (!insertId) <span class="cstat-no" title="statement not covered" >return res.status(400).send('Failed to insert todo');</span></span>
 &nbsp;
       const todo: Todo = <span class="cstat-no" title="statement not covered" >{</span>
-        id: insertId,
-        todo_completed,
-        todo_description,
-        todo_name,
+        id: insertId
+        todo_email,
       };
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return res.status(200).send({</span>
