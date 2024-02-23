@@ -1,14 +1,22 @@
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView} from 'react-native';
+import Header from '../../components/Header/Header';
+import Button from '../../components/Button/Button';
 
+import style from './style';
 import globalStyle from '../../assets/styles/globalStyle';
 
 const Home = () => {
   return (
     <SafeAreaView style={[globalStyle.backgroundWhite, globalStyle.flex]}>
-      <View>
-        <Text>Hello World!</Text>
-      </View>
+      <Header title={'Azzahri A.'} type={1} />
+      <Button
+        title={'Donate'}
+        onPress={() => {
+          console.log('pressed');
+        }}
+      />
+      <Button title={'donate'} isDisabled={true} />
     </SafeAreaView>
   );
 };
